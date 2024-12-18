@@ -1,0 +1,31 @@
+citHeader("To cite spanishoddata R package and data in publications use:")
+
+bibentry(
+  key      = "spanishoddata",
+  bibtype  = "Manual",
+  title    = "spanishoddata",
+  author   = c(
+    person("Egor", "Kotov", , "kotov.egor@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-6690-5345")),
+    person("Robin", "Lovelace", , "rob00x@gmail.com", role = "aut",
+           comment = c(ORCID = "0000-0001-5679-6536")),
+    person("Eugeni", "Vidal-Tortosa", role = "ctb",
+           comment = c(ORCID = "0000-0001-5199-4103"))
+  ),
+  year     = "2024",
+  url      = "https://github.com/rOpenSpain/spanishoddata",
+  doi      = "10.32614/CRAN.package.spanishoddata"
+)
+
+
+bibentry(
+       key      = "mitma_mobility_2024_v8",
+       bibtype  = "TechReport",
+       title    = "Estudio de movilidad de viajeros de ámbito nacional aplicando la tecnología Big Data. Informe metodológico (Study of National Traveler mobility Using Big Data Technology. Methodological Report)",
+       author     = "MITMS",
+       institution = "Secretaría de Estado de Transportes y Movilidad Sostenible; Ministerio de Transportes, Movilidad y Agenda Urbana",
+       year     = "2024",
+       url      = "https://www.transportes.gob.es/ministerio/proyectos-singulares/estudio-de-movilidad-con-big-data",
+       urldate  = "2024-12-11",
+       annotation = "https://www.transportes.gob.es/recursos_mfom/paginabasica/recursos/a3_informe_metodologico_estudio_movilidad_mitms_v8.pdf"
+)

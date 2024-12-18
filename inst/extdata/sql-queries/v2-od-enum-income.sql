@@ -1,0 +1,4 @@
+CREATE TYPE INCOME_ENUM AS ENUM (
+  '<10',
+  '10-15',
+  '>15');

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Quicky get daily data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+width: 0.8em;
+margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+
+
+
+
+<style type="text/css">body {background-color: #fff;margin: 1em auto;max-width: 700px;overflow: visible;padding-left: 2em;padding-right: 2em;font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.35;}table {margin: 1em auto;border-width: 1px;border-color: #DDDDDD;border-style: outset;border-collapse: collapse;}table th {border-width: 2px;padding: 5px;border-style: inset;}table td {border-width: 1px;border-style: inset;line-height: 18px;padding: 5px 5px;}table, table th, table td {border-left-style: none;border-right-style: none;}table thead, table tr.even {background-color: #f7f7f7;}p {margin: 0.5em 0;}blockquote {background-color: #f6f6f6;padding: 0.25em 0.75em;}hr {border-style: solid;border: none;border-top: 1px solid #777;margin: 28px 0;}dl {margin-left: 0;}dl dd {margin-bottom: 13px;margin-left: 13px;}dl dt {font-weight: bold;}ul {margin-top: 0;}ul li {list-style: circle outside;}ul ul {margin-bottom: 0;}pre, code {background-color: #f7f7f7;border-radius: 3px;color: #333;white-space: pre-wrap; }pre {border-radius: 3px;margin: 5px 0px 10px 0px;padding: 10px;}pre:not([class]) {background-color: #f7f7f7;}code {font-family: Consolas, Monaco, 'Courier New', monospace;font-size: 85%;}p > code, li > code {padding: 2px 0px;}div.figure {text-align: center;}img {background-color: #FFFFFF;padding: 2px;border: 1px solid #DDDDDD;border-radius: 3px;border: 1px solid #CCCCCC;margin: 0 5px;}h1 {margin-top: 0;font-size: 35px;line-height: 40px;}h2 {border-bottom: 4px solid #f7f7f7;padding-top: 10px;padding-bottom: 2px;font-size: 145%;}h3 {border-bottom: 2px solid #f7f7f7;padding-top: 10px;font-size: 120%;}h4 {border-bottom: 1px solid #f7f7f7;margin-left: 8px;font-size: 105%;}h5, h6 {border-bottom: 1px solid #ccc;font-size: 105%;}a {color: #0033dd;text-decoration: none;}a:hover {color: #6666ff; }a:visited {color: #800080; }a:visited:hover {color: #BB00BB; }a[href^="http:"] {text-decoration: underline; }a[href^="https:"] {text-decoration: underline; }</style>
+</head>
+
+<body>
+
+
+<header id="title-block-header">
+<h1 class="title">Quicky get daily data</h1>
+
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#intro" id="toc-intro"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#setup" id="toc-setup"><span class="header-section-number">2</span> Setup</a>
+  <ul>
+  <li><a href="#set-data-folder" id="toc-set-data-folder"><span class="header-section-number">2.1</span> Set the data directory</a></li>
+  </ul></li>
+  <li><a href="#get-data" id="toc-get-data"><span class="header-section-number">3</span> Get the data</a>
+  <ul>
+  <li><a href="#get-all-flows-with-at-least-1000-trips" id="toc-get-all-flows-with-at-least-1000-trips"><span class="header-section-number">3.1</span> Get all flows with at least 1000 trips</a></li>
+  <li><a href="#get-only-trips-of-certain-length" id="toc-get-only-trips-of-certain-length"><span class="header-section-number">3.2</span> Get only trips of certain length</a></li>
+  <li><a href="#get-only-trips-between-certain-municipalities" id="toc-get-only-trips-between-certain-municipalities"><span class="header-section-number">3.3</span> Get only trips between certain municipalities</a></li>
+  </ul></li>
+  </ul>
+</nav>
+<h1 data-number="1" id="intro"><span class="header-section-number">1</span> Introduction</h1>
+<p>This vignette demonstrates how to get minimal daily aggregated data on the number of trips between municipalities using the <code>spod_quick_get_od()</code> function. With this function, you only get total trips for a single day, and no additional variables that are available in the full <a href="v2-2022-onwards-mitma-data-codebook.html">v2 (2022 onwards) data set</a>. The advantage of this function is that it is much faster than downloading the full data from source CSV files using <code>spod_get()</code>, as each CSV file for a single day is about 200 MB in size. Also, this way of getting the data is much less demanding on your computer as you are only getting a small table from the internet (less than 1 MB), and no data processing (such as aggregation from more detailed hourly data with extra columns that is happening when you use <code>spod_get()</code> function) is required on your computer.</p>
+<h1 data-number="2" id="setup"><span class="header-section-number">2</span> Setup</h1>
+<p>Make sure you have loaded the package:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spanishoddata)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+</div>
+<h2 data-number="2.1" id="set-data-folder"><span class="header-section-number">2.1</span> Set the data directory</h2>
+<p>Choose where <code>{spanishoddata}</code> should download (and convert) the data by setting the data directory following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spod_set_data_dir</span>(<span class="at">data_dir =</span> <span class="st">&quot;~/spanish_od_data&quot;</span>)</span></code></pre></div>
+</div>
+<p>The function above will also ensure that the directory is created and that you have sufficient permissions to write to it.</p>
+<details>
+<summary>
+Setting data directory for advanced users
+</summary>
+<p>You can also set the data directory with an environment variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">SPANISH_OD_DATA_DIR =</span> <span class="st">&quot;~/spanish_od_data&quot;</span>)</span></code></pre></div>
+</div>
+<p>The package will create this directory if it does not exist on the first run of any function that downloads the data.</p>
+<p>To permanently set the directory for all projects, you can specify the data directory globally by setting the <code>SPANISH_OD_DATA_DIR</code> environment variable, e.g. with the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_environ</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Then set the data directory globally, by typing this line in the file:</span></span></code></pre></div>
+</div>
+<pre><code>SPANISH_OD_DATA_DIR = &quot;~/spanish_od_data&quot;</code></pre>
+<p>You can also set the data directory locally, just for the current project. Set the ‘envar’ in the working directory by editing <code>.Renviron</code> file in the root of the project:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(<span class="st">&quot;.Renviron&quot;</span>)</span></code></pre></div>
+</div>
+</details>
+<div>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>Setting a local data directory in this case is optional, as the data is downloaded directly from the web API and there is no caching on disk. However, the metadata will be downloaded to check the range of valid dates available at the time of the request. So metadata will be downloaded to a temporary location by default, or to the data directory, if you do set it.</p>
+</blockquote>
+</div>
+<h1 data-number="3" id="get-data"><span class="header-section-number">3</span> Get the data</h1>
+<h2 data-number="3.1" id="get-all-flows-with-at-least-1000-trips"><span class="header-section-number">3.1</span> Get all flows with at least 1000 trips</h2>
+<p>To get the data, use the <code>spod_quick_get_od()</code> function. There is no need to specify whether you need municipalities or districts, as the only municipal level data can be accessed with this function. The <code>min_trips</code> argument specifies the minimum number of trips to include in the data. If you set <code>min_trips</code> to 0, you will get all data for all origin-destination pairs for the specified date.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>od_1000 <span class="ot">&lt;-</span> <span class="fu">spod_quick_get_od</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> <span class="st">&quot;2022-01-01&quot;</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_trips =</span> <span class="dv">1000</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<p>The data is returned as a tibble and only contanes the requested date, the identifiers of the origin and destination municipalities, the number of trips, and the total length of trips in kilometers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(od_1000)</span></code></pre></div>
+</div>
+<pre><code>glimpse(od_1000)
+Rows: 8,524
+Columns: 5
+$ date                  &lt;date&gt; 2022-01-01, 2022-01-01, 2022-01-01, 2022…
+$ id_origin             &lt;chr&gt; &quot;01001&quot;, &quot;01002&quot;, &quot;01002&quot;, &quot;01002&quot;, &quot;0100…
+$ id_destination        &lt;chr&gt; &quot;01059&quot;, &quot;01036&quot;, &quot;01002&quot;, &quot;01054_AM&quot;, &quot;0…
+$ n_trips               &lt;int&gt; 2142, 1215, 8899, 1105, 2250, 4621, 1992,…
+$ trips_total_length_km &lt;int&gt; 27130, 13743, 26700, 10603, 12228, 69999,…</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>od_1000</span></code></pre></div>
+</div>
+<pre><code># A tibble: 8,524 × 5
+   date       id_origin id_destination n_trips trips_total_length_km
+   &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;int&gt;                 &lt;int&gt;
+ 1 2022-01-01 01001     01059             2142                 27130
+ 2 2022-01-01 01002     01036             1215                 13743
+ 3 2022-01-01 01002     01002             8899                 26700
+ 4 2022-01-01 01002     01054_AM          1105                 10603
+ 5 2022-01-01 01002     01010             2250                 12228
+ 6 2022-01-01 01009_AM  01059             4621                 69999
+ 7 2022-01-01 01009_AM  01009_AM          1992                 16395
+ 8 2022-01-01 01009_AM  01051             2680                 18554
+ 9 2022-01-01 01010     01002             2147                 11578
+10 2022-01-01 01017_AM  01017_AM          1847                 12695
+# ℹ 8,514 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+<h2 data-number="3.2" id="get-only-trips-of-certain-length"><span class="header-section-number">3.2</span> Get only trips of certain length</h2>
+<p>To get only trips of a certain length, use the <code>distances</code> argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>od_long <span class="ot">&lt;-</span> <span class="fu">spod_quick_get_od</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> <span class="st">&quot;2022-01-01&quot;</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_trips =</span> <span class="dv">0</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">distances =</span> <span class="fu">c</span>(<span class="st">&quot;10-50km&quot;</span>, <span class="st">&quot;50+km&quot;</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(od_long)</span></code></pre></div>
+</div>
+<pre><code>Rows: 247,208
+Columns: 5
+$ date                  &lt;date&gt; 2022-01-01, 2022-01-01, 2022-01-01, 2022…
+$ id_origin             &lt;chr&gt; &quot;08015&quot;, &quot;08015&quot;, &quot;08015&quot;, &quot;08015&quot;, &quot;0801…
+$ id_destination        &lt;chr&gt; &quot;08285&quot;, &quot;17902_AM&quot;, &quot;43014&quot;, &quot;08007&quot;, &quot;0…
+$ n_trips               &lt;int&gt; 5, 1, 5, 165, 210, 111, 1486, 39, 52, 166…
+$ trips_total_length_km &lt;int&gt; 339, 161, 924, 5052, 2955, 2453, 29630, 1…</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>od_long</span></code></pre></div>
+</div>
+<pre><code># A tibble: 247,208 × 5
+   date       id_origin id_destination n_trips trips_total_length_km
+   &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;int&gt;                 &lt;int&gt;
+ 1 2022-01-01 08015     08285                5                   339
+ 2 2022-01-01 08015     17902_AM             1                   161
+ 3 2022-01-01 08015     43014                5                   924
+ 4 2022-01-01 08015     08007              165                  5052
+ 5 2022-01-01 08015     08030              210                  2955
+ 6 2022-01-01 08015     08051              111                  2453
+ 7 2022-01-01 08015     08121             1486                 29630
+ 8 2022-01-01 08015     08122_AM            39                  1886
+ 9 2022-01-01 08015     08300_AM            52                  1301
+10 2022-01-01 08015     08902              166                  2042
+# ℹ 247,198 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+<h2 data-number="3.3" id="get-only-trips-between-certain-municipalities"><span class="header-section-number">3.3</span> Get only trips between certain municipalities</h2>
+<p>To get only trips between certain municipalities, use the <code>id_origin</code> and <code>id_destination</code> arguments.</p>
+<p>You can get all valid munincipality identifiers with the <code>spod_get_zones(&quot;muni&quot;, ver = 2)</code> function. This function will need to download some spatial data, so it might take some time and you might want to <a href="#setup">setup the data download folder</a> with <code>spod_setup_cache()</code> if you have not done so before.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>municipalities <span class="ot">&lt;-</span> <span class="fu">spod_get_zones</span>(<span class="st">&quot;muni&quot;</span>, <span class="at">ver =</span> <span class="dv">2</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(municipalities)</span></code></pre></div>
+</div>
+<h3 data-number="3.3.1" id="all-trips-from-madrid"><span class="header-section-number">3.3.1</span> All trips from Madrid</h3>
+<p>Let us select all locations with Madrid in the name:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>madrid_muni_ids <span class="ot">&lt;-</span> municipalities <span class="sc">|&gt;</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">&quot;Madrid&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(id)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>madrid_muni_ids</span></code></pre></div>
+</div>
+<pre><code>[1] &quot;28073&quot; &quot;28079&quot; &quot;28127&quot; &quot;45087&quot;</code></pre>
+<p>Now let use use these IDs as origins to gett all trips from Madrid to the rest of Spain:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>flows_from_Madrid <span class="ot">&lt;-</span> <span class="fu">spod_quick_get_od</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> <span class="st">&quot;2022-01-01&quot;</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_trips =</span> <span class="dv">0</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">id_origin =</span> madrid_muni_ids</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(flows_from_Madrid)</span></code></pre></div>
+</div>
+<pre><code>Rows: 2,232
+Columns: 5
+$ date                  &lt;date&gt; 2022-01-01, 2022-01-01, 2022-01-01, 2022…
+$ id_origin             &lt;chr&gt; &quot;28073&quot;, &quot;28073&quot;, &quot;28073&quot;, &quot;28073&quot;, &quot;2807…
+$ id_destination        &lt;chr&gt; &quot;28007&quot;, &quot;28066&quot;, &quot;28079&quot;, &quot;45081&quot;, &quot;FR10…
+$ n_trips               &lt;int&gt; 1239, 1505, 3730, 237, 2, 10, 11, 5, 9, 2…
+$ trips_total_length_km &lt;int&gt; 11120, 7268, 75798, 3385, 82, 296, 1036, …</code></pre>
+<pre><code># A tibble: 2,232 × 5
+   date       id_origin id_destination n_trips trips_total_length_km
+   &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;int&gt;                 &lt;int&gt;
+ 1 2022-01-01 28073     28007             1239                 11120
+ 2 2022-01-01 28073     28066             1505                  7268
+ 3 2022-01-01 28073     28079             3730                 75798
+ 4 2022-01-01 28073     45081              237                  3385
+ 5 2022-01-01 28073     FR102                2                    82
+ 6 2022-01-01 28073     28177               10                   296
+ 7 2022-01-01 28073     45165               11                  1036
+ 8 2022-01-01 28073     46011_AM             5                  1621
+ 9 2022-01-01 28073     21076_AM             9                  4102
+10 2022-01-01 28073     46120_AM             2                   631
+# ℹ 2,222 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+<h3 data-number="3.3.2" id="all-trips-from-madrid-to-barcelona"><span class="header-section-number">3.3.2</span> All trips from Madrid to Barcelona</h3>
+<p>Similarly, you can set limits on the destination municipalities:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>barcelona_muni_ids <span class="ot">&lt;-</span> municipalities <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">&quot;Barcelona&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(id)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>barcelona_muni_ids</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>madrid_barcelona_od <span class="ot">&lt;-</span> <span class="fu">spod_quick_get_od</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">date =</span> <span class="st">&quot;2022-01-01&quot;</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">min_trips =</span> <span class="dv">0</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">id_origin =</span> madrid_muni_ids,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">id_destination =</span> barcelona_muni_ids</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>madrid_barcelona_od</span></code></pre></div>
+</div>
+<pre><code># A tibble: 4 × 5
+  date       id_origin id_destination n_trips trips_total_length_km
+  &lt;date&gt;     &lt;chr&gt;     &lt;chr&gt;            &lt;int&gt;                 &lt;int&gt;
+1 2022-01-01 28073     08019                2                  1334
+2 2022-01-01 28079     08019             1661                838281
+3 2022-01-01 28127     08019               26                 13699
+4 2022-01-01 45087     08019                2                  1184</code></pre>
+<p>You can now proceed to analyse these flows or visualise them as in the <a href="https://rOpenSpain.github.io/spanishoddata/articles/flowmaps-static.html">static</a> and <a href="https://rOpenSpain.github.io/spanishoddata/articles/flowmaps-interactive.html">interactive</a> flow maps tutorials.</p>
+
+
+
+
+
+</body></html>

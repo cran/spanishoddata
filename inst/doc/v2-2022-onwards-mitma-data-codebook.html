@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Codebook and cookbook for v2 (2022 onwards) Spanish mobility data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+width: 0.8em;
+margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+
+div.csl-bib-body { }
+div.csl-entry {
+clear: both;
+margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+margin-left:2em;
+text-indent:-2em;
+}
+div.csl-left-margin {
+min-width:2em;
+float:left;
+}
+div.csl-right-inline {
+margin-left:2em;
+padding-left:1em;
+}
+div.csl-indent {
+margin-left: 2em;
+}</style>
+
+
+
+
+<style type="text/css">body {background-color: #fff;margin: 1em auto;max-width: 700px;overflow: visible;padding-left: 2em;padding-right: 2em;font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;font-size: 14px;line-height: 1.35;}table {margin: 1em auto;border-width: 1px;border-color: #DDDDDD;border-style: outset;border-collapse: collapse;}table th {border-width: 2px;padding: 5px;border-style: inset;}table td {border-width: 1px;border-style: inset;line-height: 18px;padding: 5px 5px;}table, table th, table td {border-left-style: none;border-right-style: none;}table thead, table tr.even {background-color: #f7f7f7;}p {margin: 0.5em 0;}blockquote {background-color: #f6f6f6;padding: 0.25em 0.75em;}hr {border-style: solid;border: none;border-top: 1px solid #777;margin: 28px 0;}dl {margin-left: 0;}dl dd {margin-bottom: 13px;margin-left: 13px;}dl dt {font-weight: bold;}ul {margin-top: 0;}ul li {list-style: circle outside;}ul ul {margin-bottom: 0;}pre, code {background-color: #f7f7f7;border-radius: 3px;color: #333;white-space: pre-wrap; }pre {border-radius: 3px;margin: 5px 0px 10px 0px;padding: 10px;}pre:not([class]) {background-color: #f7f7f7;}code {font-family: Consolas, Monaco, 'Courier New', monospace;font-size: 85%;}p > code, li > code {padding: 2px 0px;}div.figure {text-align: center;}img {background-color: #FFFFFF;padding: 2px;border: 1px solid #DDDDDD;border-radius: 3px;border: 1px solid #CCCCCC;margin: 0 5px;}h1 {margin-top: 0;font-size: 35px;line-height: 40px;}h2 {border-bottom: 4px solid #f7f7f7;padding-top: 10px;padding-bottom: 2px;font-size: 145%;}h3 {border-bottom: 2px solid #f7f7f7;padding-top: 10px;font-size: 120%;}h4 {border-bottom: 1px solid #f7f7f7;margin-left: 8px;font-size: 105%;}h5, h6 {border-bottom: 1px solid #ccc;font-size: 105%;}a {color: #0033dd;text-decoration: none;}a:hover {color: #6666ff; }a:visited {color: #800080; }a:visited:hover {color: #BB00BB; }a[href^="http:"] {text-decoration: underline; }a[href^="https:"] {text-decoration: underline; }</style>
+</head>
+
+<body>
+
+
+<header id="title-block-header">
+<h1 class="title">Codebook and cookbook for v2 (2022 onwards) Spanish mobility data</h1>
+
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#install-package" id="toc-install-package">Install the package</a></li>
+  <li><a href="#set-data-folder" id="toc-set-data-folder">Set the data directory</a></li>
+  <li><a href="#overall-approach-to-accessing-the-data" id="toc-overall-approach-to-accessing-the-data">Overall approach to accessing the data</a></li>
+  <li><a href="#spatial-data-with-zoning-boundaries" id="toc-spatial-data-with-zoning-boundaries">1. Spatial data with zoning boundaries</a>
+  <ul>
+  <li><a href="#districts" id="toc-districts">1.1 <code>Districts</code></a></li>
+  <li><a href="#municipalities" id="toc-municipalities">1.2 <code>Municipalities</code></a></li>
+  <li><a href="#luas" id="toc-luas">1.3 <code>LUAs (Large Urban Areas)</code></a></li>
+  </ul></li>
+  <li><a href="#mobility-data" id="toc-mobility-data">2. Mobility data</a>
+  <ul>
+  <li><a href="#od-data" id="toc-od-data">2.1. Origin-destination data</a></li>
+  <li><a href="#nt-data" id="toc-nt-data">2.2. Number of trips data</a></li>
+  <li><a href="#os-data" id="toc-os-data">2.3. Overnight stays</a></li>
+  </ul></li>
+  </ul>
+</nav>
+<p>You can view this vignette any time by running:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>spanishoddata<span class="sc">::</span><span class="fu">spod_codebook</span>(<span class="at">ver =</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+<p>The mobility data v2 (2022 onwards) was originally released by the Ministerio de Transportes, Movilidad y Agenda Urbana (MITMA) , now <a href="https://www.transportes.gob.es/">Ministerio de Transportes y Movilidad Sostenible (MITMS)</a> <span class="citation" data-cites="mitma_mobility_2024_v8">(MITMS 2024)</span>.</p>
+<p>The dataset is produced by <a href="https://www.nommon.es/" target="_blank">Nommon</a> using the raw data from <a href="https://www.orange.es/" target="_blank">Orange España</a>. Even though the raw data is only from one mobile phone operator, the resulting flows and other counts of number of individuals in the data set are already resampled to be representative of the total population of Spain (see details in the official methodology).</p>
+<p>The tables in the data set provide hourly flows between zones across Spain for every day of the observation period (2022-01-01 onwards), the number of individuals making trips for each zone, the number of individuals spending the nights in one location while regularly residing in a different location, and many more advanced datasets. This document will introduce you to the available data and provide brief code snippets on how to access it using the <code>{spanishoddata}</code> R package.</p>
+<p>Compared to the <a href="v1-2020-2021-mitma-data-codebook.qmd">v1 data (2020-2021)</a> this dataset has many additional variables, such as age, sex, and income, has better spatial resolution (the zones are more spatially granular) and covers a continuous period<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> (2022-01-01 onward), rather than only a limited period (in v1 - 2020-02-14 to 2021-05-09).</p>
+<div>
+<blockquote>
+<p><strong>Warning</strong></p>
+<p>Due to mobile network outages, the data on certain dates is missing. Kindly keep this in mind when calculating mean monthly or weekly flows.</p>
+<p><br>
+</p>
+<p>Please check the <a href="https://www.transportes.gob.es/ministerio/proyectos-singulares/estudios-de-movilidad-con-big-data/opendata-movilidad" target="_blank">original data page</a> for currently known missing dates. At the time of writing, the following dates are missing: 26, 27, 30, 31 October; 1, 2 and 3 November 2023; 4, 18, 19 April 2024, 10 and 11 November 2024. You can use <code>spod_get_valid_dates()</code> function to get all available dates.</p>
+</blockquote>
+</div>
+<p>In v2 data, the datasets comparable to the <a href="v1-2020-2021-mitma-data-codebook.qmd">v1 (2020-2021) data</a> (hourly daily origin destination matrices and number of trips at each location) are called <a href="https://www.transportes.gob.es/ministerio/proyectos-singulares/estudios-de-movilidad-con-big-data/estudio-basico-diario" target="_blank">“basic studies” (“estudios basicos”)</a>, however there are even more advanced datasets that are already available or will be made available soon: <a href="https://www.transportes.gob.es/ministerio/proyectos-singulares/estudios-de-movilidad-con-big-data/estudios-completos" target="_blank">“complete studies” (“estudios completos”)</a> and <a href="https://www.transportes.gob.es/ministerio/proyectos-singulares/estudios-de-movilidad-con-big-data/rutas-por-carretera" target="_blank">“road routes” (“rutas de carretera”)</a>. At the moment, the <code>{spanishoddata}</code> package only provides the interface to the “basic studies” datasets, but support for “complete studies” and “road routes” will be added in the future.</p>
+<p>Key sources for this codebook/cookbook include:</p>
+<ul>
+<li><p><a href="https://www.transportes.gob.es/recursos_mfom/paginabasica/recursos/a3_informe_metodologico_estudio_movilidad_mitms_v8.pdf" target="_blank">original data collection methodology and codebook in Spanish</a> + <a href="https://rOpenSpain.github.io/spanishoddata/codebooks/a3_informe_metodologico_estudio_movilidad_mitms_v8_en.pdf" target="_blank">automatically translated English version of methodology and codebook</a></p></li>
+<li><p><a href="https://www.transportes.gob.es/recursos_mfom/paginabasica/recursos/20241024_validaciones_estudios_basicos_bigdata_v1.0.pdf" target="_blank">original quality assessment</a> + <a href="https://rOpenSpain.github.io/spanishoddata/codebooks/20241024_validaciones_estudios_basicos_bigdata_v1.0_en.pdf" target="_blank">automatically translated English version of quality assessment</a></p></li>
+<li><p><a href="https://www.transportes.gob.es/ministerio/proyectos-singulares/estudios-de-movilidad-con-big-data/opendata-movilidad" target="_blank">original data download page</a></p></li>
+<li><p><a href="https://www.transportes.gob.es/el-ministerio/buen-gobierno/licencia_datos" target="_blank">original data license</a></p></li>
+<li><p><a href="https://www.transportes.gob.es/ministerio/proyectos-singulares/estudio-de-movilidad-con-big-data" target="_blank">homepage of the v2 study and open mobility data project of the Ministry of Transport and Sustainable Mobility of Spain</a></p></li>
+</ul>
+<div>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>Kindly consult the documents above for any specific details on the methodology. The codebook here is only a simplified summary.</p>
+</blockquote>
+</div>
+<p>To access the data we reference in this codebook, please follow these steps:</p>
+<h2 id="install-package">Install the package</h2>
+<p>The package is not yet available on CRAN.</p>
+<p>You can install the latest version of the package from rOpenSpain R universe:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;spanishoddata&quot;</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">repos =</span> <span class="fu">c</span>(<span class="st">&quot;https://ropenspain.r-universe.dev&quot;</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;https://cloud.r-project.org&quot;</span>))</span></code></pre></div>
+</div>
+<details>
+<summary>
+Alternative installation and developemnt
+</summary>
+<p>Alternative way to install the package from GitHub:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">&quot;remotes&quot;</span>)) <span class="fu">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;rOpenSpain/spanishoddata&quot;</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">force =</span> <span class="cn">TRUE</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<p><strong>For Developers</strong></p>
+<p>To load the package locally, clone it and navigate to the root of the package in the terminal, e.g. with the following:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> repo clone rOpenSpain/spanishoddata</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> spanishoddata</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># with rstudio:</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">rstudio</span> spanishoddata/spanishoddata.Rproj</span></code></pre></div>
+<p>Then run the following command from the R console:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>()</span></code></pre></div>
+</div>
+</details>
+<p>Load it as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spanishoddata)</span></code></pre></div>
+</div>
+<p>Using the instructions below, set the data folder for the package to download the files into. You may need up to 400 GB to download all data and another 400 GB if you would like to convert the downloaded data into analysis ready format (a <code>DuckDB</code> database file, or a folder of <code>parquet</code> files). You can find more info on this conversion in the <a href="convert.html">Download and convert OD datasets</a> vignette.</p>
+<h2 id="set-data-folder">Set the data directory</h2>
+<p>Choose where <code>{spanishoddata}</code> should download (and convert) the data by setting the data directory following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spod_set_data_dir</span>(<span class="at">data_dir =</span> <span class="st">&quot;~/spanish_od_data&quot;</span>)</span></code></pre></div>
+</div>
+<p>The function above will also ensure that the directory is created and that you have sufficient permissions to write to it.</p>
+<details>
+<summary>
+Setting data directory for advanced users
+</summary>
+<p>You can also set the data directory with an environment variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">SPANISH_OD_DATA_DIR =</span> <span class="st">&quot;~/spanish_od_data&quot;</span>)</span></code></pre></div>
+</div>
+<p>The package will create this directory if it does not exist on the first run of any function that downloads the data.</p>
+<p>To permanently set the directory for all projects, you can specify the data directory globally by setting the <code>SPANISH_OD_DATA_DIR</code> environment variable, e.g. with the following command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">edit_r_environ</span>()</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Then set the data directory globally, by typing this line in the file:</span></span></code></pre></div>
+</div>
+<pre><code>SPANISH_OD_DATA_DIR = &quot;~/spanish_od_data&quot;</code></pre>
+<p>You can also set the data directory locally, just for the current project. Set the ‘envar’ in the working directory by editing <code>.Renviron</code> file in the root of the project:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(<span class="st">&quot;.Renviron&quot;</span>)</span></code></pre></div>
+</div>
+</details>
+<h1 id="overall-approach-to-accessing-the-data">Overall approach to accessing the data</h1>
+<p>If you only need flows data aggregated by day at municipal level, you can use the <code>spod_quick_get_od()</code> function. This will download the data directly from the web API and let you analyse it in-memory. More on this in the <a href="https://ropenspain.github.io/spanishoddata/articles/quick-get.html">Quickly get daily data</a> vignette.</p>
+<p>If you only want to analyse the data for a few days, you can use the <code>spod_get()</code> function. It will download the raw data in CSV format and let you analyse it in-memory. This is what we cover in the steps on this page.</p>
+<p>If you need longer periods (several months or years), you should use the <code>spod_convert()</code> and <code>spod_connect()</code> functions, which will convert the data into special format which is much faster for analysis, for this see the <a href="https://ropenspain.github.io/spanishoddata/articles/convert.html">Download and convert OD datasets</a> vignette. <code>spod_get_zones()</code> will give you spatial data with zones that can be matched with the origin-destination flows from the functions above using zones ’id’s. Please see a simple example below, and also consult the vignettes with detailed data description and instructions in the package vignettes with <code>spod_codebook(ver = 1)</code> and <code>spod_codebook(ver = 2)</code>, or simply visit the package website at <a href="https://ropenspain.github.io/spanishoddata/">https://ropenspain.github.io/spanishoddata/</a>. The <a href="#fig-overall-flow" class="quarto-xref">Figure 1</a> presents the overall approach to accessing the data in the <code>spanishoddata</code> package.</p>
+<div id="fig-overall-flow" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-overall-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img role="img" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPD94bWwtc3R5bGVzaGVldCBocmVmPSJodHRwczovL2NkbmpzLmNsb3VkZmxhcmUuY29tL2FqYXgvbGlicy9mb250LWF3ZXNvbWUvNi41LjEvY3NzL2FsbC5taW4uY3NzIiB0eXBlPSJ0ZXh0L2NzcyI/Pgo8c3ZnIGFyaWEtcm9sZWRlc2NyaXB0aW9uPSJmbG93Y2hhcnQtdjIiIHJvbGU9ImdyYXBoaWNzLWRvY3VtZW50IGRvY3VtZW50IiB2aWV3Qm94PSIwIDAgODg3LjQ3MDcwMzEyNSAxNDYyIiBzdHlsZT0ibWF4LXdpZHRoOiAxMDAlOyBtYXgtaGVpZ2h0OiAxMDAlOyBiYWNrZ3JvdW5kOiB3aGl0ZTsiIGNsYXNzPSJmbG93Y2hhcnQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGlkPSJtZXJtYWlkLWltYWdlLWVkaXRvciI+PHN0eWxlPiNtZXJtYWlkLWltYWdlLWVkaXRvcntmb250LWZhbWlseToidHJlYnVjaGV0IG1zIix2ZXJkYW5hLGFyaWFsLHNhbnMtc2VyaWY7Zm9udC1zaXplOjE2cHg7ZmlsbDojMzMzO30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLmVycm9yLWljb257ZmlsbDojNTUyMjIyO30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLmVycm9yLXRleHR7ZmlsbDojNTUyMjIyO3N0cm9rZTojNTUyMjIyO30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLmVkZ2UtdGhpY2tuZXNzLW5vcm1hbHtzdHJva2Utd2lkdGg6MXB4O30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLmVkZ2UtdGhpY2tuZXNzLXRoaWNre3N0cm9rZS13aWR0aDozLjVweDt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5lZGdlLXBhdHRlcm4tc29saWR7c3Ryb2tlLWRhc2hhcnJheTowO30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLmVkZ2UtdGhpY2tuZXNzLWludmlzaWJsZXtzdHJva2Utd2lkdGg6MDtmaWxsOm5vbmU7fSNtZXJtYWlkLWltYWdlLWVkaXRvciAuZWRnZS1wYXR0ZXJuLWRhc2hlZHtzdHJva2UtZGFzaGFycmF5OjM7fSNtZXJtYWlkLWltYWdlLWVkaXRvciAuZWRnZS1wYXR0ZXJuLWRvdHRlZHtzdHJva2UtZGFzaGFycmF5OjI7fSNtZXJtYWlkLWltYWdlLWVkaXRvciAubWFya2Vye2ZpbGw6IzMzMzMzMztzdHJva2U6IzMzMzMzMzt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5tYXJrZXIuY3Jvc3N7c3Ryb2tlOiMzMzMzMzM7fSNtZXJtYWlkLWltYWdlLWVkaXRvciBzdmd7Zm9udC1mYW1pbHk6InRyZWJ1Y2hldCBtcyIsdmVyZGFuYSxhcmlhbCxzYW5zLXNlcmlmO2ZvbnQtc2l6ZToxNnB4O30jbWVybWFpZC1pbWFnZS1lZGl0b3IgcHttYXJnaW46MDt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5sYWJlbHtmb250LWZhbWlseToidHJlYnVjaGV0IG1zIix2ZXJkYW5hLGFyaWFsLHNhbnMtc2VyaWY7Y29sb3I6IzMzMzt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5jbHVzdGVyLWxhYmVsIHRleHR7ZmlsbDojMzMzO30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLmNsdXN0ZXItbGFiZWwgc3Bhbntjb2xvcjojMzMzO30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLmNsdXN0ZXItbGFiZWwgc3BhbiBwe2JhY2tncm91bmQtY29sb3I6dHJhbnNwYXJlbnQ7fSNtZXJtYWlkLWltYWdlLWVkaXRvciAubGFiZWwgdGV4dCwjbWVybWFpZC1pbWFnZS1lZGl0b3Igc3BhbntmaWxsOiMzMzM7Y29sb3I6IzMzMzt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5ub2RlIHJlY3QsI21lcm1haWQtaW1hZ2UtZWRpdG9yIC5ub2RlIGNpcmNsZSwjbWVybWFpZC1pbWFnZS1lZGl0b3IgLm5vZGUgZWxsaXBzZSwjbWVybWFpZC1pbWFnZS1lZGl0b3IgLm5vZGUgcG9seWdvbiwjbWVybWFpZC1pbWFnZS1lZGl0b3IgLm5vZGUgcGF0aHtmaWxsOiNFQ0VDRkY7c3Ryb2tlOiM5MzcwREI7c3Ryb2tlLXdpZHRoOjFweDt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5yb3VnaC1ub2RlIC5sYWJlbCB0ZXh0LCNtZXJtYWlkLWltYWdlLWVkaXRvciAubm9kZSAubGFiZWwgdGV4dCwjbWVybWFpZC1pbWFnZS1lZGl0b3IgLmltYWdlLXNoYXBlIC5sYWJlbCwjbWVybWFpZC1pbWFnZS1lZGl0b3IgLmljb24tc2hhcGUgLmxhYmVse3RleHQtYW5jaG9yOm1pZGRsZTt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5ub2RlIC5rYXRleCBwYXRoe2ZpbGw6IzAwMDtzdHJva2U6IzAwMDtzdHJva2Utd2lkdGg6MXB4O30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLnJvdWdoLW5vZGUgLmxhYmVsLCNtZXJtYWlkLWltYWdlLWVkaXRvciAubm9kZSAubGFiZWwsI21lcm1haWQtaW1hZ2UtZWRpdG9yIC5pbWFnZS1zaGFwZSAubGFiZWwsI21lcm1haWQtaW1hZ2UtZWRpdG9yIC5pY29uLXNoYXBlIC5sYWJlbHt0ZXh0LWFsaWduOmNlbnRlcjt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5ub2RlLmNsaWNrYWJsZXtjdXJzb3I6cG9pbnRlcjt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5yb290IC5hbmNob3IgcGF0aHtmaWxsOiMzMzMzMzMhaW1wb3J0YW50O3N0cm9rZS13aWR0aDowO3N0cm9rZTojMzMzMzMzO30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLmFycm93aGVhZFBhdGh7ZmlsbDojMzMzMzMzO30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLmVkZ2VQYXRoIC5wYXRoe3N0cm9rZTojMzMzMzMzO3N0cm9rZS13aWR0aDoyLjBweDt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5mbG93Y2hhcnQtbGlua3tzdHJva2U6IzMzMzMzMztmaWxsOm5vbmU7fSNtZXJtYWlkLWltYWdlLWVkaXRvciAuZWRnZUxhYmVse2JhY2tncm91bmQtY29sb3I6cmdiYSgyMzIsMjMyLDIzMiwgMC44KTt0ZXh0LWFsaWduOmNlbnRlcjt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5lZGdlTGFiZWwgcHtiYWNrZ3JvdW5kLWNvbG9yOnJnYmEoMjMyLDIzMiwyMzIsIDAuOCk7fSNtZXJtYWlkLWltYWdlLWVkaXRvciAuZWRnZUxhYmVsIHJlY3R7b3BhY2l0eTowLjU7YmFja2dyb3VuZC1jb2xvcjpyZ2JhKDIzMiwyMzIsMjMyLCAwLjgpO2ZpbGw6cmdiYSgyMzIsMjMyLDIzMiwgMC44KTt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5sYWJlbEJrZ3tiYWNrZ3JvdW5kLWNvbG9yOnJnYmEoMjMyLCAyMzIsIDIzMiwgMC41KTt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5jbHVzdGVyIHJlY3R7ZmlsbDojZmZmZmRlO3N0cm9rZTojYWFhYTMzO3N0cm9rZS13aWR0aDoxcHg7fSNtZXJtYWlkLWltYWdlLWVkaXRvciAuY2x1c3RlciB0ZXh0e2ZpbGw6IzMzMzt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIC5jbHVzdGVyIHNwYW57Y29sb3I6IzMzMzt9I21lcm1haWQtaW1hZ2UtZWRpdG9yIGRpdi5tZXJtYWlkVG9vbHRpcHtwb3NpdGlvbjphYnNvbHV0ZTt0ZXh0LWFsaWduOmNlbnRlcjttYXgtd2lkdGg6MjAwcHg7cGFkZGluZzoycHg7Zm9udC1mYW1pbHk6InRyZWJ1Y2hldCBtcyIsdmVyZGFuYSxhcmlhbCxzYW5zLXNlcmlmO2ZvbnQtc2l6ZToxMnB4O2JhY2tncm91bmQ6aHNsKDgwLCAxMDAlLCA5Ni4yNzQ1MDk4MDM5JSk7Ym9yZGVyOjFweCBzb2xpZCAjYWFhYTMzO2JvcmRlci1yYWRpdXM6MnB4O3BvaW50ZXItZXZlbnRzOm5vbmU7ei1pbmRleDoxMDA7fSNtZXJtYWlkLWltYWdlLWVkaXRvciAuZmxvd2NoYXJ0VGl0bGVUZXh0e3RleHQtYW5jaG9yOm1pZGRsZTtmb250LXNpemU6MThweDtmaWxsOiMzMzM7fSNtZXJtYWlkLWltYWdlLWVkaXRvciByZWN0LnRleHR7ZmlsbDpub25lO3N0cm9rZS13aWR0aDowO30jbWVybWFpZC1pbWFnZS1lZGl0b3IgLmljb24tc2hhcGUsI21lcm1haWQtaW1hZ2UtZWRpdG9yIC5pbWFnZS1zaGFwZXtiYWNrZ3JvdW5kLWNvbG9yOnJnYmEoMjMyLDIzMiwyMzIsIDAuOCk7dGV4dC1hbGlnbjpjZW50ZXI7fSNtZXJtYWlkLWltYWdlLWVkaXRvciAuaWNvbi1zaGFwZSBwLCNtZXJtYWlkLWltYWdlLWVkaXRvciAuaW1hZ2Utc2hhcGUgcHtiYWNrZ3JvdW5kLWNvbG9yOnJnYmEoMjMyLDIzMiwyMzIsIDAuOCk7cGFkZGluZzoycHg7fSNtZXJtYWlkLWltYWdlLWVkaXRvciAuaWNvbi1zaGFwZSByZWN0LCNtZXJtYWlkLWltYWdlLWVkaXRvciAuaW1hZ2Utc2hhcGUgcmVjdHtvcGFjaXR5OjAuNTtiYWNrZ3JvdW5kLWNvbG9yOnJnYmEoMjMyLDIzMiwyMzIsIDAuOCk7ZmlsbDpyZ2JhKDIzMiwyMzIsMjMyLCAwLjgpO30jbWVybWFpZC1pbWFnZS1lZGl0b3IgOnJvb3R7LS1tZXJtYWlkLWZvbnQtZmFtaWx5OiJ0cmVidWNoZXQgbXMiLHZlcmRhbmEsYXJpYWwsc2Fucy1zZXJpZjt9PC9zdHlsZT48Zz48bWFya2VyIG9yaWVudD0iYXV0byIgbWFya2VySGVpZ2h0PSI4IiBtYXJrZXJXaWR0aD0iOCIgbWFya2VyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiByZWZZPSI1IiByZWZYPSI1IiB2aWV3Qm94PSIwIDAgMTAgMTAiIGNsYXNzPSJtYXJrZXIgZmxvd2NoYXJ0LXYyIiBpZD0ibWVybWFpZC1pbWFnZS1lZGl0b3JfZmxvd2NoYXJ0LXYyLXBvaW50RW5kIj48cGF0aCBzdHlsZT0ic3Ryb2tlLXdpZHRoOiAxOyBzdHJva2UtZGFzaGFycmF5OiAxLCAwOyIgY2xhc3M9ImFycm93TWFya2VyUGF0aCIgZD0iTSAwIDAgTCAxMCA1IEwgMCAxMCB6Ij48L3BhdGg+PC9tYXJrZXI+PG1hcmtlciBvcmllbnQ9ImF1dG8iIG1hcmtlckhlaWdodD0iOCIgbWFya2VyV2lkdGg9IjgiIG1hcmtlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcmVmWT0iNSIgcmVmWD0iNC41IiB2aWV3Qm94PSIwIDAgMTAgMTAiIGNsYXNzPSJtYXJrZXIgZmxvd2NoYXJ0LXYyIiBpZD0ibWVybWFpZC1pbWFnZS1lZGl0b3JfZmxvd2NoYXJ0LXYyLXBvaW50U3RhcnQiPjxwYXRoIHN0eWxlPSJzdHJva2Utd2lkdGg6IDE7IHN0cm9rZS1kYXNoYXJyYXk6IDEsIDA7IiBjbGFzcz0iYXJyb3dNYXJrZXJQYXRoIiBkPSJNIDAgNSBMIDEwIDEwIEwgMTAgMCB6Ij48L3BhdGg+PC9tYXJrZXI+PG1hcmtlciBvcmllbnQ9ImF1dG8iIG1hcmtlckhlaWdodD0iMTEiIG1hcmtlcldpZHRoPSIxMSIgbWFya2VyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiByZWZZPSI1IiByZWZYPSIxMSIgdmlld0JveD0iMCAwIDEwIDEwIiBjbGFzcz0ibWFya2VyIGZsb3djaGFydC12MiIgaWQ9Im1lcm1haWQtaW1hZ2UtZWRpdG9yX2Zsb3djaGFydC12Mi1jaXJjbGVFbmQiPjxjaXJjbGUgc3R5bGU9InN0cm9rZS13aWR0aDogMTsgc3Ryb2tlLWRhc2hhcnJheTogMSwgMDsiIGNsYXNzPSJhcnJvd01hcmtlclBhdGgiIHI9IjUiIGN5PSI1IiBjeD0iNSI+PC9jaXJjbGU+PC9tYXJrZXI+PG1hcmtlciBvcmllbnQ9ImF1dG8iIG1hcmtlckhlaWdodD0iMTEiIG1hcmtlcldpZHRoPSIxMSIgbWFya2VyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiByZWZZPSI1IiByZWZYPSItMSIgdmlld0JveD0iMCAwIDEwIDEwIiBjbGFzcz0ibWFya2VyIGZsb3djaGFydC12MiIgaWQ9Im1lcm1haWQtaW1hZ2UtZWRpdG9yX2Zsb3djaGFydC12Mi1jaXJjbGVTdGFydCI+PGNpcmNsZSBzdHlsZT0ic3Ryb2tlLXdpZHRoOiAxOyBzdHJva2UtZGFzaGFycmF5OiAxLCAwOyIgY2xhc3M9ImFycm93TWFya2VyUGF0aCIgcj0iNSIgY3k9IjUiIGN4PSI1Ij48L2NpcmNsZT48L21hcmtlcj48bWFya2VyIG9yaWVudD0iYXV0byIgbWFya2VySGVpZ2h0PSIxMSIgbWFya2VyV2lkdGg9IjExIiBtYXJrZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIHJlZlk9IjUuMiIgcmVmWD0iMTIiIHZpZXdCb3g9IjAgMCAxMSAxMSIgY2xhc3M9Im1hcmtlciBjcm9zcyBmbG93Y2hhcnQtdjIiIGlkPSJtZXJtYWlkLWltYWdlLWVkaXRvcl9mbG93Y2hhcnQtdjItY3Jvc3NFbmQiPjxwYXRoIHN0eWxlPSJzdHJva2Utd2lkdGg6IDI7IHN0cm9rZS1kYXNoYXJyYXk6IDEsIDA7IiBjbGFzcz0iYXJyb3dNYXJrZXJQYXRoIiBkPSJNIDEsMSBsIDksOSBNIDEwLDEgbCAtOSw5Ij48L3BhdGg+PC9tYXJrZXI+PG1hcmtlciBvcmllbnQ9ImF1dG8iIG1hcmtlckhlaWdodD0iMTEiIG1hcmtlcldpZHRoPSIxMSIgbWFya2VyVW5pdHM9InVzZXJTcGFjZU9uVXNlIiByZWZZPSI1LjIiIHJlZlg9Ii0xIiB2aWV3Qm94PSIwIDAgMTEgMTEiIGNsYXNzPSJtYXJrZXIgY3Jvc3MgZmxvd2NoYXJ0LXYyIiBpZD0ibWVybWFpZC1pbWFnZS1lZGl0b3JfZmxvd2NoYXJ0LXYyLWNyb3NzU3RhcnQiPjxwYXRoIHN0eWxlPSJzdHJva2Utd2lkdGg6IDI7IHN0cm9rZS1kYXNoYXJyYXk6IDEsIDA7IiBjbGFzcz0iYXJyb3dNYXJrZXJQYXRoIiBkPSJNIDEsMSBsIDksOSBNIDEwLDEgbCAtOSw5Ij48L3BhdGg+PC9tYXJrZXI+PGcgY2xhc3M9InJvb3QiPjxnIGNsYXNzPSJjbHVzdGVycyI+PC9nPjxnIGNsYXNzPSJlZGdlUGF0aHMiPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbWVybWFpZC1pbWFnZS1lZGl0b3JfZmxvd2NoYXJ0LXYyLXBvaW50RW5kKSIgc3R5bGU9IiIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayIgaWQ9IkxfTV9GXzAiIGQ9Ik0xMzgsNDU0TDEzOCw0NjguMTY3QzEzOCw0ODIuMzMzLDEzOCw1MTAuNjY3LDE2OC43OTYsNTM4LjcyNkMxOTkuNTkxLDU2Ni43ODUsMjYxLjE4Miw1OTQuNTcsMjkxLjk3OCw2MDguNDYzTDMyMi43NzMsNjIyLjM1NSI+PC9wYXRoPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbWVybWFpZC1pbWFnZS1lZGl0b3JfZmxvd2NoYXJ0LXYyLXBvaW50RW5kKSIgc3R5bGU9IiIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayIgaWQ9IkxfQV9GXzEiIGQ9Ik00NDgsNDU0TDQ0OCw0NjguMTY3QzQ0OCw0ODIuMzMzLDQ0OCw1MTAuNjY3LDQ0Ny4xNTMsNTM4LjMzNUM0NDYuMzA3LDU2Ni4wMDMsNDQ0LjYxMyw1OTMuMDA1LDQ0My43NjYsNjA2LjUwN0w0NDIuOTIsNjIwLjAwOCI+PC9wYXRoPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbWVybWFpZC1pbWFnZS1lZGl0b3JfZmxvd2NoYXJ0LXYyLXBvaW50RW5kKSIgc3R5bGU9IiIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayIgaWQ9IkxfQ19EXzIiIGQ9Ik03NDAuOTQxLDEzNEw3NDAuOTQxLDE0OC4xNjdDNzQwLjk0MSwxNjIuMzMzLDc0MC45NDEsMTkwLjY2Nyw3NDAuOTQxLDIyNi4zMzNDNzQwLjk0MSwyNjIsNzQwLjk0MSwzMDUsNzQwLjk0MSwzMjYuNUw3NDAuOTQxLDM0OCI+PC9wYXRoPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbWVybWFpZC1pbWFnZS1lZGl0b3JfZmxvd2NoYXJ0LXYyLXBvaW50RW5kKSIgc3R5bGU9IiIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayIgaWQ9IkxfRF9GXzMiIGQ9Ik03NDAuOTQxLDQwNkw3NDAuOTQxLDQyOC4xNjdDNzQwLjk0MSw0NTAuMzMzLDc0MC45NDEsNDk0LjY2Nyw3MTAuMTQ2LDUzMC43MjZDNjc5LjM1LDU2Ni43ODUsNjE3Ljc1OSw1OTQuNTcsNTg2Ljk2NCw2MDguNDYzTDU1Ni4xNjgsNjIyLjM1NSI+PC9wYXRoPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbWVybWFpZC1pbWFnZS1lZGl0b3JfZmxvd2NoYXJ0LXYyLXBvaW50RW5kKSIgc3R5bGU9IiIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayIgaWQ9IkxfRl9HXzQiIGQ9Ik00MzkuNDcxLDcyNkw0MzkuNDcxLDczOC4xNjdDNDM5LjQ3MSw3NTAuMzMzLDQzOS40NzEsNzc0LjY2Nyw0MzkuNDcxLDc5OC4zMzNDNDM5LjQ3MSw4MjIsNDM5LjQ3MSw4NDUsNDM5LjQ3MSw4NTYuNUw0MzkuNDcxLDg2OCI+PC9wYXRoPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbWVybWFpZC1pbWFnZS1lZGl0b3JfZmxvd2NoYXJ0LXYyLXBvaW50RW5kKSIgc3R5bGU9IiIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayIgaWQ9IkxfR19IXzUiIGQ9Ik00MzkuNDcxLDkyNkw0MzkuNDcxLDkzNi4xNjdDNDM5LjQ3MSw5NDYuMzMzLDQzOS40NzEsOTY2LjY2Nyw0MzkuNDcxLDk5MC4zMzNDNDM5LjQ3MSwxMDE0LDQzOS40NzEsMTA0MSw0MzkuNDcxLDEwNTQuNUw0MzkuNDcxLDEwNjgiPjwvcGF0aD48cGF0aCBtYXJrZXItZW5kPSJ1cmwoI21lcm1haWQtaW1hZ2UtZWRpdG9yX2Zsb3djaGFydC12Mi1wb2ludEVuZCkiIHN0eWxlPSIiIGNsYXNzPSJlZGdlLXRoaWNrbmVzcy1ub3JtYWwgZWRnZS1wYXR0ZXJuLXNvbGlkIGVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZmxvd2NoYXJ0LWxpbmsiIGlkPSJMX0hfUl82IiBkPSJNNDM5LjQ3MSwxMTUwTDQzOS40NzEsMTE1OC4xNjdDNDM5LjQ3MSwxMTY2LjMzMyw0MzkuNDcxLDExODIuNjY3LDQ0OS40OTYsMTE5NC43NTdDNDU5LjUyMiwxMjA2Ljg0Nyw0NzkuNTczLDEyMTQuNjk1LDQ4OS41OTksMTIxOC42MThMNDk5LjYyNCwxMjIyLjU0MiI+PC9wYXRoPjxwYXRoIG1hcmtlci1lbmQ9InVybCgjbWVybWFpZC1pbWFnZS1lZGl0b3JfZmxvd2NoYXJ0LXYyLXBvaW50RW5kKSIgc3R5bGU9IiIgY2xhc3M9ImVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBmbG93Y2hhcnQtbGluayIgaWQ9IkxfUl9YWF83IiBkPSJNNjAzLDEzMDJMNjAzLDEzMDYuMTY3QzYwMywxMzEwLjMzMyw2MDMsMTMxOC42NjcsNjAzLDEzMjYuMzMzQzYwMywxMzM0LDYwMywxMzQxLDYwMywxMzQ0LjVMNjAzLDEzNDgiPjwvcGF0aD48cGF0aCBtYXJrZXItZW5kPSJ1cmwoI21lcm1haWQtaW1hZ2UtZWRpdG9yX2Zsb3djaGFydC12Mi1wb2ludEVuZCkiIHN0eWxlPSIiIGNsYXNzPSJlZGdlLXRoaWNrbmVzcy1ub3JtYWwgZWRnZS1wYXR0ZXJuLXNvbGlkIGVkZ2UtdGhpY2tuZXNzLW5vcm1hbCBlZGdlLXBhdHRlcm4tc29saWQgZmxvd2NoYXJ0LWxpbmsiIGlkPSJMX1hfWV84IiBkPSJNNzQ5LjQ3MSw5MjZMNzQ5LjQ3MSw5MzYuMTY3Qzc0OS40NzEsOTQ2LjMzMyw3NDkuNDcxLDk2Ni42NjcsNzQ5LjQ3MSw5ODYuMzMzQzc0OS40NzEsMTAwNiw3NDkuNDcxLDEwMjUsNzQ5LjQ3MSwxMDM0LjVMNzQ5LjQ3MSwxMDQ0Ij48L3BhdGg+PHBhdGggbWFya2VyLWVuZD0idXJsKCNtZXJtYWlkLWltYWdlLWVkaXRvcl9mbG93Y2hhcnQtdjItcG9pbnRFbmQpIiBzdHlsZT0iIiBjbGFzcz0iZWRnZS10aGlja25lc3Mtbm9ybWFsIGVkZ2UtcGF0dGVybi1zb2xpZCBlZGdlLXRoaWNrbmVzcy1ub3JtYWwgZWRnZS1wYXR0ZXJuLXNvbGlkIGZsb3djaGFydC1saW5rIiBpZD0iTF9ZX1JfOSIgZD0iTTc0OS40NzEsMTE3NEw3NDkuNDcxLDExNzguMTY3Qzc0OS40NzEsMTE4Mi4zMzMsNzQ5LjQ3MSwxMTkwLjY2Nyw3NDAuNTQ2LDExOTguNzMzQzczMS42MjEsMTIwNi43OTksNzEzLjc3MSwxMjE0LjU5OSw3MDQuODQ2LDEyMTguNDk5TDY5NS45MjEsMTIyMi4zOTgiPjwvcGF0aD48L2c+PGcgY2xhc3M9ImVkZ2VMYWJlbHMiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEzOCwgNTM5KSIgY2xhc3M9ImVkZ2VMYWJlbCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTcxLjM3NSwgLTI0KSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjQ4IiB3aWR0aD0iMTQyLjc1Ij48ZGl2IGNsYXNzPSJsYWJlbEJrZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiB0YWJsZS1jZWxsOyB3aGl0ZS1zcGFjZTogbm93cmFwOyBsaW5lLWhlaWdodDogMS41OyBtYXgtd2lkdGg6IDIwMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj48cD5zcG9kX3F1aWNrX2dldF9vZCg8YnIvPmRhdGUgPSAnMjAyMi0wMy0xNScpPC9wPjwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0NDgsIDUzOSkiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDAsIC02MCkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxMjAiIHdpZHRoPSIyMDAiPjxkaXYgY2xhc3M9ImxhYmVsQmtnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IHRhYmxlOyB3aGl0ZS1zcGFjZTogYnJlYWstc3BhY2VzOyBsaW5lLWhlaWdodDogMS41OyBtYXgtd2lkdGg6IDIwMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7IHdpZHRoOiAyMDBweDsiPjxzcGFuIGNsYXNzPSJlZGdlTGFiZWwiPjxwPnNwb2RfZ2V0KDxici8+dHlwZSA9ICdvcmlnaW4tZGVzdGluYXRpb24nLDxici8+em9uZXMgPSAnZGlzdHJpY3RzJyw8YnIvPmRhdGVzID0gYyhzdGFydCA9ICcyMDIwLTAyLTE0JywgZW5kID0gJzIwMjAtMDItMjEnKSApPC9wPjwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3NDAuOTQxNDA2MjUsIDIxOSkiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDAsIC02MCkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIxMjAiIHdpZHRoPSIyMDAiPjxkaXYgY2xhc3M9ImxhYmVsQmtnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IHRhYmxlOyB3aGl0ZS1zcGFjZTogYnJlYWstc3BhY2VzOyBsaW5lLWhlaWdodDogMS41OyBtYXgtd2lkdGg6IDIwMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7IHdpZHRoOiAyMDBweDsiPjxzcGFuIGNsYXNzPSJlZGdlTGFiZWwiPjxwPnNwb2RfY29udmVydCg8YnIvPnR5cGUgPSAnb3JpZ2luLWRlc3RpbmF0aW9uJyw8YnIvPnpvbmVzID0gJ2Rpc3RyaWN0cycsPGJyLz5kYXRlcyA9IGMoc3RhcnQgPSAnMjAyMC0wMi0xNCcsIGVuZCA9ICcyMDIxLTA1LTA5JykgKTwvcD48L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzQwLjk0MTQwNjI1LCA1MzkpIiBjbGFzcz0iZWRnZUxhYmVsIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTUuMDA3ODEyNSwgLTEyKSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjI0IiB3aWR0aD0iMTEwLjAxNTYyNSI+PGRpdiBjbGFzcz0ibGFiZWxCa2ciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGUtY2VsbDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgbGluZS1oZWlnaHQ6IDEuNTsgbWF4LXdpZHRoOiAyMDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+PHA+c3BvZF9jb25uZWN0KCk8L3A+PC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQzOS40NzA3MDMxMjUsIDc5OSkiIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDAsIC00OCkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSI5NiIgd2lkdGg9IjIwMCI+PGRpdiBjbGFzcz0ibGFiZWxCa2ciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGU7IHdoaXRlLXNwYWNlOiBicmVhay1zcGFjZXM7IGxpbmUtaGVpZ2h0OiAxLjU7IG1heC13aWR0aDogMjAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgd2lkdGg6IDIwMHB4OyI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+PHA+ZHBseXIgZnVuY3Rpb25zOiBzZWxlY3QoKSwgZmlsdGVyKCksIG11dGF0ZSgpLCBncm91cF9ieSgpLCBzdW1tYXJpc2UoKSwgZXRjLi4uPC9wPjwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyBjbGFzcz0iZWRnZUxhYmVsIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgwLCAwKSIgY2xhc3M9ImxhYmVsIj48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjAiIHdpZHRoPSIwIj48ZGl2IGNsYXNzPSJsYWJlbEJrZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiB0YWJsZS1jZWxsOyB3aGl0ZS1zcGFjZTogbm93cmFwOyBsaW5lLWhlaWdodDogMS41OyBtYXgtd2lkdGg6IDIwMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj48L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgY2xhc3M9ImVkZ2VMYWJlbCI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMCwgMCkiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIwIiB3aWR0aD0iMCI+PGRpdiBjbGFzcz0ibGFiZWxCa2ciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGUtY2VsbDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgbGluZS1oZWlnaHQ6IDEuNTsgbWF4LXdpZHRoOiAyMDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PHNwYW4gY2xhc3M9ImVkZ2VMYWJlbCI+PC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsIDApIiBjbGFzcz0ibGFiZWwiPjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMCIgd2lkdGg9IjAiPjxkaXYgY2xhc3M9ImxhYmVsQmtnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IHRhYmxlLWNlbGw7IHdoaXRlLXNwYWNlOiBub3dyYXA7IGxpbmUtaGVpZ2h0OiAxLjU7IG1heC13aWR0aDogMjAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxzcGFuIGNsYXNzPSJlZGdlTGFiZWwiPjwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3NDkuNDcwNzAzMTI1LCA5ODcpIiBjbGFzcz0iZWRnZUxhYmVsIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNjMuNDgwNDY4NzUsIC0zNikiIGNsYXNzPSJsYWJlbCI+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSI3MiIgd2lkdGg9IjEyNi45NjA5Mzc1Ij48ZGl2IGNsYXNzPSJsYWJlbEJrZyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiB0YWJsZS1jZWxsOyB3aGl0ZS1zcGFjZTogbm93cmFwOyBsaW5lLWhlaWdodDogMS41OyBtYXgtd2lkdGg6IDIwMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48c3BhbiBjbGFzcz0iZWRnZUxhYmVsIj48cD5zcG9kX2dldF96b25lcyg8YnIvPnpvbmVzID0gJ2Rpc3RyaWN0cycsPGJyLz52ZXIgPSAxICk8L3A+PC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIGNsYXNzPSJlZGdlTGFiZWwiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsIDApIiBjbGFzcz0ibGFiZWwiPjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMCIgd2lkdGg9IjAiPjxkaXYgY2xhc3M9ImxhYmVsQmtnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IHRhYmxlLWNlbGw7IHdoaXRlLXNwYWNlOiBub3dyYXA7IGxpbmUtaGVpZ2h0OiAxLjU7IG1heC13aWR0aDogMjAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsiPjxzcGFuIGNsYXNzPSJlZGdlTGFiZWwiPjwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48L2c+PGcgY2xhc3M9Im5vZGVzIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMzgsIDM3OSkiIGlkPSJmbG93Y2hhcnQtTS0zNCIgY2xhc3M9Im5vZGUgZGVmYXVsdCI+PHJlY3QgaGVpZ2h0PSIxNTAiIHdpZHRoPSIyNjAiIHk9Ii03NSIgeD0iLTEzMCIgc3R5bGU9IiIgY2xhc3M9ImJhc2ljIGxhYmVsLWNvbnRhaW5lciI+PC9yZWN0PjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMDAsIC02MCkiIHN0eWxlPSIiIGNsYXNzPSJsYWJlbCI+PHJlY3Q+PC9yZWN0Pjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMTIwIiB3aWR0aD0iMjAwIj48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGU7IHdoaXRlLXNwYWNlOiBicmVhay1zcGFjZXM7IGxpbmUtaGVpZ2h0OiAxLjU7IG1heC13aWR0aDogMjAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgd2lkdGg6IDIwMHB4OyI+PHNwYW4gY2xhc3M9Im5vZGVMYWJlbCI+PHA+Rm9yIGRhaWx5IGFnZ3JlZ2F0ZWQgZmxvd3MgYXQgbXVudWNpcGFsIGxldmVsICgyMDIyIG9ud2FyZHMpPGJyLz5nZXQgZGF0YSBmcm9tIEdyYXBoUUwgQVBJIGRpcmVjdGx5PC9wPjwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MzkuNDcwNzAzMTI1LCA2NzUpIiBpZD0iZmxvd2NoYXJ0LUYtMzUiIGNsYXNzPSJub2RlIGRlZmF1bHQiPjxyZWN0IGhlaWdodD0iMTAyIiB3aWR0aD0iMjYwIiB5PSItNTEiIHg9Ii0xMzAiIHN0eWxlPSIiIGNsYXNzPSJiYXNpYyBsYWJlbC1jb250YWluZXIiPjwvcmVjdD48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAwLCAtMzYpIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0PjwvcmVjdD48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjcyIiB3aWR0aD0iMjAwIj48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGU7IHdoaXRlLXNwYWNlOiBicmVhay1zcGFjZXM7IGxpbmUtaGVpZ2h0OiAxLjU7IG1heC13aWR0aDogMjAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgd2lkdGg6IDIwMHB4OyI+PHNwYW4gY2xhc3M9Im5vZGVMYWJlbCI+PHA+J3RibCcgb2JqZWN0IHdpdGggJ2lkJyBmb3Igb3JpZ2lucyBhbmQgZGVzdGluYXRpb25zIGFuZCB0cmlwIGNvdW50czwvcD48L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDQ4LCAzNzkpIiBpZD0iZmxvd2NoYXJ0LUEtMzYiIGNsYXNzPSJub2RlIGRlZmF1bHQiPjxyZWN0IGhlaWdodD0iMTUwIiB3aWR0aD0iMjYwIiB5PSItNzUiIHg9Ii0xMzAiIHN0eWxlPSIiIGNsYXNzPSJiYXNpYyBsYWJlbC1jb250YWluZXIiPjwvcmVjdD48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAwLCAtNjApIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0PjwvcmVjdD48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjEyMCIgd2lkdGg9IjIwMCI+PGRpdiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94aHRtbCIgc3R5bGU9ImRpc3BsYXk6IHRhYmxlOyB3aGl0ZS1zcGFjZTogYnJlYWstc3BhY2VzOyBsaW5lLWhlaWdodDogMS41OyBtYXgtd2lkdGg6IDIwMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7IHdpZHRoOiAyMDBweDsiPjxzcGFuIGNsYXNzPSJub2RlTGFiZWwiPjxwPkhvdWxyeSBmbG93cyBhbmQgb3RoZXIgZGF0YSBmb3IgYSBmZXcgZGF5cyBzdGFydGluZyBpbiAyMDIwPGJyLz5nZXQgZGF0YSBmcm9tIHJhdyBDU1YuZ3ogZmlsZXM8L3A+PC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc0MC45NDE0MDYyNSwgNzEpIiBpZD0iZmxvd2NoYXJ0LUMtMzgiIGNsYXNzPSJub2RlIGRlZmF1bHQiPjxyZWN0IGhlaWdodD0iMTI2IiB3aWR0aD0iMjYwIiB5PSItNjMiIHg9Ii0xMzAiIHN0eWxlPSIiIGNsYXNzPSJiYXNpYyBsYWJlbC1jb250YWluZXIiPjwvcmVjdD48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAwLCAtNDgpIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0PjwvcmVjdD48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9Ijk2IiB3aWR0aD0iMjAwIj48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGU7IHdoaXRlLXNwYWNlOiBicmVhay1zcGFjZXM7IGxpbmUtaGVpZ2h0OiAxLjU7IG1heC13aWR0aDogMjAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgd2lkdGg6IDIwMHB4OyI+PHNwYW4gY2xhc3M9Im5vZGVMYWJlbCI+PHA+QW5hbHlzZSBsb25nZXIgcGVyaW9kcyAoc2V2ZXJhbCBtb250aHMpPGJyLz5vciBldmVuIHRoZSB3aG9sZSBkYXRhc2V0IG92ZXIgc2V2ZXJhbCB5ZWFyczwvcD48L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzQwLjk0MTQwNjI1LCAzNzkpIiBpZD0iZmxvd2NoYXJ0LUQtMzkiIGNsYXNzPSJub2RlIGRlZmF1bHQiPjxyZWN0IGhlaWdodD0iNTQiIHdpZHRoPSIyMjUuODgyODEyNSIgeT0iLTI3IiB4PSItMTEyLjk0MTQwNjI1IiBzdHlsZT0iIiBjbGFzcz0iYmFzaWMgbGFiZWwtY29udGFpbmVyIj48L3JlY3Q+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTgyLjk0MTQwNjI1LCAtMTIpIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0PjwvcmVjdD48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjI0IiB3aWR0aD0iMTY1Ljg4MjgxMjUiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiB0YWJsZS1jZWxsOyB3aGl0ZS1zcGFjZTogbm93cmFwOyBsaW5lLWhlaWdodDogMS41OyBtYXgtd2lkdGg6IDIwMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48c3BhbiBjbGFzcz0ibm9kZUxhYmVsIj48cD5wYXRoIHRvIGNvbnZlcnRlZCBkYXRhPC9wPjwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MzkuNDcwNzAzMTI1LCA4OTkpIiBpZD0iZmxvd2NoYXJ0LUctNDMiIGNsYXNzPSJub2RlIGRlZmF1bHQiPjxyZWN0IGhlaWdodD0iNTQiIHdpZHRoPSIxNjkuMDkzNzUiIHk9Ii0yNyIgeD0iLTg0LjU0Njg3NSIgc3R5bGU9IiIgY2xhc3M9ImJhc2ljIGxhYmVsLWNvbnRhaW5lciI+PC9yZWN0PjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC01NC41NDY4NzUsIC0xMikiIHN0eWxlPSIiIGNsYXNzPSJsYWJlbCI+PHJlY3Q+PC9yZWN0Pjxmb3JlaWduT2JqZWN0IGhlaWdodD0iMjQiIHdpZHRoPSIxMDkuMDkzNzUiPjxkaXYgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGh0bWwiIHN0eWxlPSJkaXNwbGF5OiB0YWJsZS1jZWxsOyB3aGl0ZS1zcGFjZTogbm93cmFwOyBsaW5lLWhlaWdodDogMS41OyBtYXgtd2lkdGg6IDIwMHB4OyB0ZXh0LWFsaWduOiBjZW50ZXI7Ij48c3BhbiBjbGFzcz0ibm9kZUxhYmVsIj48cD5kcGx5cjo6Y29sbGVjdCgpPC9wPjwvc3Bhbj48L2Rpdj48L2ZvcmVpZ25PYmplY3Q+PC9nPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0MzkuNDcwNzAzMTI1LCAxMTExKSIgaWQ9ImZsb3djaGFydC1ILTQ1IiBjbGFzcz0ibm9kZSBkZWZhdWx0Ij48cmVjdCBoZWlnaHQ9Ijc4IiB3aWR0aD0iMjYwIiB5PSItMzkiIHg9Ii0xMzAiIHN0eWxlPSIiIGNsYXNzPSJiYXNpYyBsYWJlbC1jb250YWluZXIiPjwvcmVjdD48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAwLCAtMjQpIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0PjwvcmVjdD48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjQ4IiB3aWR0aD0iMjAwIj48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGU7IHdoaXRlLXNwYWNlOiBicmVhay1zcGFjZXM7IGxpbmUtaGVpZ2h0OiAxLjU7IG1heC13aWR0aDogMjAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgd2lkdGg6IDIwMHB4OyI+PHNwYW4gY2xhc3M9Im5vZGVMYWJlbCI+PHA+PHN0cm9uZz5mbG93c19kYXRhPC9zdHJvbmc+IC0gZGF0YS5mcmFtZSAvIHRpYmJsZTwvcD48L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjAzLCAxMjYzKSIgaWQ9ImZsb3djaGFydC1SLTQ2IiBjbGFzcz0ibm9kZSBkZWZhdWx0Ij48cmVjdCBoZWlnaHQ9Ijc4IiB3aWR0aD0iMjYwIiB5PSItMzkiIHg9Ii0xMzAiIHN0eWxlPSIiIGNsYXNzPSJiYXNpYyBsYWJlbC1jb250YWluZXIiPjwvcmVjdD48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAwLCAtMjQpIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0PjwvcmVjdD48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjQ4IiB3aWR0aD0iMjAwIj48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGU7IHdoaXRlLXNwYWNlOiBicmVhay1zcGFjZXM7IGxpbmUtaGVpZ2h0OiAxLjU7IG1heC13aWR0aDogMjAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgd2lkdGg6IDIwMHB4OyI+PHNwYW4gY2xhc3M9Im5vZGVMYWJlbCI+PHA+bGVmdF9qb2luKDxzdHJvbmc+em9uZXM8L3N0cm9uZz4sIDxzdHJvbmc+Zmxvd3NfZGF0YTwvc3Ryb25nPik8L3A+PC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDYwMywgMTQwMykiIGlkPSJmbG93Y2hhcnQtWFgtNDciIGNsYXNzPSJub2RlIGRlZmF1bHQiPjxyZWN0IGhlaWdodD0iMTAyIiB3aWR0aD0iMjYwIiB5PSItNTEiIHg9Ii0xMzAiIHN0eWxlPSIiIGNsYXNzPSJiYXNpYyBsYWJlbC1jb250YWluZXIiPjwvcmVjdD48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAwLCAtMzYpIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0PjwvcmVjdD48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9IjcyIiB3aWR0aD0iMjAwIj48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGU7IHdoaXRlLXNwYWNlOiBicmVhay1zcGFjZXM7IGxpbmUtaGVpZ2h0OiAxLjU7IG1heC13aWR0aDogMjAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgd2lkdGg6IDIwMHB4OyI+PHNwYW4gY2xhc3M9Im5vZGVMYWJlbCI+PHA+c3BhdGlhbCBkYXRhIG1hdGNoZWQgYnkgJ2lkJyB3aXRoIGFnZ2VnYXRlZCBtb2JpbGl0eSBmbG93czwvcD48L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzQ5LjQ3MDcwMzEyNSwgODk5KSIgaWQ9ImZsb3djaGFydC1YLTQ4IiBjbGFzcz0ibm9kZSBkZWZhdWx0Ij48cmVjdCBoZWlnaHQ9IjU0IiB3aWR0aD0iMjI2LjAzOTA2MjUiIHk9Ii0yNyIgeD0iLTExMy4wMTk1MzEyNSIgc3R5bGU9IiIgY2xhc3M9ImJhc2ljIGxhYmVsLWNvbnRhaW5lciI+PC9yZWN0PjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC04My4wMTk1MzEyNSwgLTEyKSIgc3R5bGU9IiIgY2xhc3M9ImxhYmVsIj48cmVjdD48L3JlY3Q+PGZvcmVpZ25PYmplY3QgaGVpZ2h0PSIyNCIgd2lkdGg9IjE2Ni4wMzkwNjI1Ij48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGUtY2VsbDsgd2hpdGUtc3BhY2U6IG5vd3JhcDsgbGluZS1oZWlnaHQ6IDEuNTsgbWF4LXdpZHRoOiAyMDBweDsgdGV4dC1hbGlnbjogY2VudGVyOyI+PHNwYW4gY2xhc3M9Im5vZGVMYWJlbCI+PHA+c3BhdGlhbCBkYXRhIHdpdGggem9uZXM8L3A+PC9zcGFuPjwvZGl2PjwvZm9yZWlnbk9iamVjdD48L2c+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc0OS40NzA3MDMxMjUsIDExMTEpIiBpZD0iZmxvd2NoYXJ0LVktNDkiIGNsYXNzPSJub2RlIGRlZmF1bHQiPjxyZWN0IGhlaWdodD0iMTI2IiB3aWR0aD0iMjYwIiB5PSItNjMiIHg9Ii0xMzAiIHN0eWxlPSIiIGNsYXNzPSJiYXNpYyBsYWJlbC1jb250YWluZXIiPjwvcmVjdD48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTAwLCAtNDgpIiBzdHlsZT0iIiBjbGFzcz0ibGFiZWwiPjxyZWN0PjwvcmVjdD48Zm9yZWlnbk9iamVjdCBoZWlnaHQ9Ijk2IiB3aWR0aD0iMjAwIj48ZGl2IHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hodG1sIiBzdHlsZT0iZGlzcGxheTogdGFibGU7IHdoaXRlLXNwYWNlOiBicmVhay1zcGFjZXM7IGxpbmUtaGVpZ2h0OiAxLjU7IG1heC13aWR0aDogMjAwcHg7IHRleHQtYWxpZ246IGNlbnRlcjsgd2lkdGg6IDIwMHB4OyI+PHNwYW4gY2xhc3M9Im5vZGVMYWJlbCI+PHA+PHN0cm9uZz56b25lczwvc3Ryb25nPiAtIHBvbHlnb25zIHdpdGggem9uZXMgaW4gc2Ygb2JqZWN0PGJyLz53aXRoICdpZCcgdGhhdCBtYXRjaCB3aXRoIG9yaWdpbnMgYW5kIGRlc3RpbmF0aW9uczwvcD48L3NwYW4+PC9kaXY+PC9mb3JlaWduT2JqZWN0PjwvZz48L2c+PC9nPjwvZz48L2c+PC9zdmc+" style="width:78.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overall-flow-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 1: The overview of package functions to get the data
+</figcaption>
+</figure>
+</div>
+<h1 id="spatial-data-with-zoning-boundaries">1. Spatial data with zoning boundaries</h1>
+<p>The boundary data is provided at three geographic levels: <a href="#districts"><code>Distrtics</code></a>, <a href="#municipalities"><code>Municipalities</code></a>, and <a href="#lua"><code>Large Urban Areas</code></a>. It’s important to note that these do not always align with the official Spanish census districts and municipalities. To comply with data protection regulations, certain aggregations had to be made to districts and municipalities”.</p>
+<h2 id="districts">1.1 <code>Districts</code></h2>
+<p><code>Districts</code> correspond to official census districts in cities; however, in those with lower population density, they are grouped together. In rural areas, one district is often equal to a municipality, but municipalities with low population are combined into larger units to preserve privacy of individuals in the dataset. Therefore, there are 3792 ‘districts’ compared to the 10494 official census districts on which they are based. There are also <a href="https://ec.europa.eu/eurostat/web/nuts" target="_blank">NUTS3 statistical regions</a> covering France (94 units) and Portugal (23 units). Therefore there is a total of 3909 zones in the <code>Districts</code> dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>districts_v2 <span class="ot">&lt;-</span> <span class="fu">spod_get_zones</span>(<span class="st">&quot;dist&quot;</span>, <span class="at">ver =</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+<p>The <code>districts_v2</code> object is of class <code>sf</code> consisting of polygons.</p>
+<p>Data structure:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Variable Name</th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>District <code>id</code> assigned by the data provider. Matches with <code>id_origin</code>, <code>id_destination</code>, and <code>id</code> in district-level origin-destination and number of trips data.</td>
+</tr>
+<tr class="even">
+<td><code>name</code></td>
+<td>Name of the district.</td>
+</tr>
+<tr class="odd">
+<td><code>population</code></td>
+<td>Number of individuals in the district according to <a href="https://ine.es/" target="_blank">INE</a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</td>
+</tr>
+<tr class="even">
+<td><code>census_sections</code></td>
+<td>Semicolon-separated list of census section identifiers that correspond to each district, classified by the Spanish Statistical Office (INE).</td>
+</tr>
+<tr class="odd">
+<td><code>census_districts</code></td>
+<td>Semicolon-separated list of census district identifiers corresponding to each district, as classified by the Spanish Statistical Office (INE).</td>
+</tr>
+<tr class="even">
+<td><code>municipalities</code></td>
+<td>Semicolon-separated list of municipality identifiers corresponding to each district, as classified by the Spanish Statistical Office (INE).</td>
+</tr>
+<tr class="odd">
+<td><code>municipalities_mitma</code></td>
+<td>Semicolon-separated list of municipality identifiers as assigned by the data provider (MITMA).</td>
+</tr>
+<tr class="even">
+<td><code>luas_mitma</code></td>
+<td>Semicolon-separated list of Large Urban Areas (LUAs) as assigned by the data provider, corresponding to each district.</td>
+</tr>
+<tr class="odd">
+<td><code>district_ids_in_v1</code></td>
+<td>Semicolon-separated district identifiers from v1 data corresponding to each district in v2. If no match exists, marked as <code>NA</code>.</td>
+</tr>
+<tr class="even">
+<td><code>geometry</code></td>
+<td>Spatial geometry of each district stored as a <code>MULTIPOLYGON</code> object, projected in the ETRS89 / UTM zone 30N CRS with XY dimensions.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="municipalities">1.2 <code>Municipalities</code></h2>
+<p><code>Municipalities</code> are made up of official municipalities in those of a certain size; however, they have also been aggregated in cases of lower population density. As a result, there are 2618 municipalities compared to the 8,125 official municipalities on which they are based. There are also <a href="https://ec.europa.eu/eurostat/web/nuts" target="_blank">NUTS3 statistical regions</a> covering France (94 units) and Portugal (23 units). Therefore there is a total of 2735 zones in the <code>Districts</code> dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>municipalities_v2 <span class="ot">&lt;-</span> <span class="fu">spod_get_zones</span>(<span class="st">&quot;muni&quot;</span>, <span class="at">ver =</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+<p>The resulting <code>municipalities_v2</code> object is type <code>sf</code> consisting of polygons.</p>
+<p>Data structure:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Variable Name</th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>District <code>id</code> assigned by the data provider. Matches with <code>id_origin</code>, <code>id_destination</code>, and <code>id</code> in district-level origin-destination and number of trips data.</td>
+</tr>
+<tr class="even">
+<td><code>name</code></td>
+<td>Name of the district.</td>
+</tr>
+<tr class="odd">
+<td><code>population</code></td>
+<td>Number of individuals in the district according to <a href="https://ine.es/" target="_blank">INE</a><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</td>
+</tr>
+<tr class="even">
+<td><code>census_sections</code></td>
+<td>Semicolon-separated list of census section identifiers that correspond to each district, classified by the Spanish Statistical Office (INE).</td>
+</tr>
+<tr class="odd">
+<td><code>census_districts</code></td>
+<td>Semicolon-separated list of census district identifiers corresponding to each district, as classified by the Spanish Statistical Office (INE).</td>
+</tr>
+<tr class="even">
+<td><code>municipalities</code></td>
+<td>Semicolon-separated list of municipality identifiers corresponding to each district, as classified by the Spanish Statistical Office (INE).</td>
+</tr>
+<tr class="odd">
+<td><code>districts_mitma</code></td>
+<td>Semicolon-separated list of district identifiers as assigned by the data provider (MITMA).</td>
+</tr>
+<tr class="even">
+<td><code>luas_mitma</code></td>
+<td>Semicolon-separated list of Large Urban Areas (LUAs) as assigned by the data provider, corresponding to each district.</td>
+</tr>
+<tr class="odd">
+<td><code>municipality_ids_in_v1</code></td>
+<td>Semicolon-separated district identifiers from v1 data corresponding to each district in v2. If no match exists, marked as <code>NA</code>.</td>
+</tr>
+<tr class="even">
+<td><code>geometry</code></td>
+<td>Spatial geometry of each district stored as a <code>MULTIPOLYGON</code> object, projected in the ETRS89 / UTM zone 30N CRS with XY dimensions.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="luas">1.3 <code>LUAs (Large Urban Areas)</code></h2>
+<p><code>Large Urban Areas (LUAs)</code> has essentially the same spatial units as <a href="#municipalities"><code>Municipalities</code></a>, but are not aggregated. Therefore, there are 2086 locations in the <code>LUAs</code> dataset. There are also <a href="https://ec.europa.eu/eurostat/web/nuts" target="_blank">NUTS3 statistical regions</a> covering France (94 units) and Portugal (23 units). Therefore there is a total of 2203 zones in the <code>LUAs</code> dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>luas_v2 <span class="ot">&lt;-</span> <span class="fu">spod_get_zones</span>(<span class="st">&quot;lua&quot;</span>, <span class="at">ver =</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+<p>The resulting <code>luas_v2</code> object is type <code>sf</code> consisting of polygons.</p>
+<p>Data structure:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Variable Name</th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>District <code>id</code> assigned by the data provider. Matches with <code>id_origin</code>, <code>id_destination</code>, and <code>id</code> in district-level origin-destination and number of trips data.</td>
+</tr>
+<tr class="even">
+<td><code>name</code></td>
+<td>Name of the district.</td>
+</tr>
+<tr class="odd">
+<td><code>population</code></td>
+<td>Number of individuals in the district according to <a href="https://ine.es/" target="_blank">INE</a><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</td>
+</tr>
+<tr class="even">
+<td><code>census_sections</code></td>
+<td>Semicolon-separated list of census section identifiers that correspond to each district, classified by the Spanish Statistical Office (INE).</td>
+</tr>
+<tr class="odd">
+<td><code>census_districts</code></td>
+<td>Semicolon-separated list of census district identifiers corresponding to each district, as classified by the Spanish Statistical Office (INE).</td>
+</tr>
+<tr class="even">
+<td><code>municipalities</code></td>
+<td>Semicolon-separated list of municipality identifiers corresponding to each district, as classified by the Spanish Statistical Office (INE).</td>
+</tr>
+<tr class="odd">
+<td><code>districts_mitma</code></td>
+<td>Semicolon-separated list of district identifiers as assigned by the data provider (MITMA).</td>
+</tr>
+<tr class="even">
+<td><code>municipalities_mitma</code></td>
+<td>Semicolon-separated list of municipality identifiers as assigned by the data provider (MITMA).</td>
+</tr>
+<tr class="odd">
+<td><code>geometry</code></td>
+<td>Spatial geometry of each district stored as a <code>MULTIPOLYGON</code> object, projected in the ETRS89 / UTM zone 30N CRS with XY dimensions.</td>
+</tr>
+</tbody>
+</table>
+<h1 id="mobility-data">2. Mobility data</h1>
+<p>All mobility data is referenced via <code>id_origin</code>, <code>id_destination</code>, or other location identifiers (mostly labelled as <code>id</code>) with the two sets of zones described above.</p>
+<h2 id="od-data">2.1. Origin-destination data</h2>
+<p>The origin-destination data contain the number of trips between <code>districts</code>, <code>municipalities</code>, or <code>large urban areas (LUAs)</code> in Spain for every hour of every day between 2022-02-01 and whichever currently available latest data (2024-06-30 at the time of writing). Each flow also has attributes such as the trip purpose (composed of the type of activity (<code>home</code>/<code>work_or_study</code>/<code>frequent_activity</code>/<code>infrequent_activity</code>) at both the origin and destination, but also age, sex, and income of each group of individuals traveling between the origin and destination), province of residence of individuals making this trip, distance covered while making the trip. See the detailed attributes below in a table.</p>
+<p>Here are the variables you can find in the <code>district</code>, <code>municipality</code> and <code>large urban area</code> level data:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>English Variable Name</strong></th>
+<th><strong>Original Variable Name</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>date</code></td>
+<td><code>fecha</code></td>
+<td><code>Date</code></td>
+<td>The date of the recorded data, formatted as <code>YYYY-MM-DD</code>.</td>
+</tr>
+<tr class="even">
+<td><code>time_slot</code></td>
+<td><code>periodo</code></td>
+<td><code>integer</code></td>
+<td>The time slot during which the trips occurred.</td>
+</tr>
+<tr class="odd">
+<td><code>id_origin</code></td>
+<td><code>origen</code></td>
+<td><code>factor</code></td>
+<td>The origin zone <code>id</code> of <code>district</code>, <code>municipality</code>, or <code>large urban area</code>.</td>
+</tr>
+<tr class="even">
+<td><code>id_destination</code></td>
+<td><code>destino</code></td>
+<td><code>factor</code></td>
+<td>The destination zone <code>id</code> of <code>district</code>, <code>municipality</code>, or <code>large urban area</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>distance</code></td>
+<td><code>distancia</code></td>
+<td><code>factor</code></td>
+<td>The distance range of the trip, categorized into specific intervals such as <code>0.5-2</code> (500 m to 2 km), <code>2-10</code> (2-10 km), <code>10-50</code> (10-50km), and <code>&gt;50</code> (50 or more km).</td>
+</tr>
+<tr class="even">
+<td><code>activity_origin</code></td>
+<td><code>actividad_origen</code></td>
+<td><code>factor</code></td>
+<td>The type of activity at the origin zone, recoded from <code>casa</code>, <code>trabajo_estudio</code>, <code>frecuente</code>, <code>no_frecuente</code> to <code>home</code>, <code>work_or_study</code>, <code>frequent_activity</code>, <code>infrequent_activity</code> respectively.</td>
+</tr>
+<tr class="odd">
+<td><code>activity_destination</code></td>
+<td><code>actividad_destino</code></td>
+<td><code>factor</code></td>
+<td>The type of activity at the destination zone, similarly recoded as for <code>activity_origin</code> above.</td>
+</tr>
+<tr class="even">
+<td><code>study_possible_origin</code></td>
+<td><code>estudio_origen_posible</code></td>
+<td><code>logical</code></td>
+<td><code>TRUE</code> if the activity at origin may be connected with study, and <code>FALSE</code> otherwise.</td>
+</tr>
+<tr class="odd">
+<td><code>study_possible_destination</code></td>
+<td><code>estudio_destino_posible</code></td>
+<td><code>logical</code></td>
+<td><code>TRUE</code> if the activity at destination may be connected with study, and <code>FALSE</code> otherwise.</td>
+</tr>
+<tr class="even">
+<td><code>residence_province_ine_code</code></td>
+<td><code>residencia</code></td>
+<td><code>factor</code></td>
+<td>The province code of residence of individuals making the trips in <code>n_trips</code>, encoded as province codes as classified by the Spanish Statistical Office (INE).</td>
+</tr>
+<tr class="odd">
+<td><code>residence_province_name</code></td>
+<td>Derived from <code>residencia</code></td>
+<td><code>factor</code></td>
+<td>The full name of the residence province, derived from the province code above.</td>
+</tr>
+<tr class="even">
+<td><code>income</code></td>
+<td><code>renta</code></td>
+<td><code>factor</code></td>
+<td>The income group of individuals making the trips in <code>n_trips</code>. Categorized into <code>&lt;10</code>, <code>10-15</code>, and <code>&gt;15</code> (thousands of euros per year). The income for each individual is assigned based on the mean census tract income per person (data source is <a href="https://www.ine.es/dyngs/INEbase/en/operacion.htm?c=Estadistica_C&amp;cid=1254736177088&amp;menu=ultiDatos&amp;idp=1254735976608">INE Household income distribution map</a>).</td>
+</tr>
+<tr class="odd">
+<td><code>age</code></td>
+<td><code>edad</code></td>
+<td><code>factor</code></td>
+<td>The age group of individuals making the trips in <code>n_trips</code>. Categorized into <code>0-25</code>, <code>25-45</code>, <code>45-65</code>, <code>65-100</code>, or <code>NA</code>. The data is partially imputed, for details see <a href="https://www.nommon.es/blog/using-machine-learning-to-predict-sociodemographic-characteristics/">this blogpost</a> by Nommon.</td>
+</tr>
+<tr class="even">
+<td><code>sex</code></td>
+<td><code>sexo</code></td>
+<td><code>factor</code></td>
+<td>The sex of individuals making the trips in <code>n_trips</code>. Categorized into <code>female</code>, <code>male</code>, or <code>NA</code>. The data is partially imputed, for details see <a href="https://www.nommon.es/blog/using-machine-learning-to-predict-sociodemographic-characteristics/">this blogpost</a> by Nommon.</td>
+</tr>
+<tr class="odd">
+<td><code>n_trips</code></td>
+<td><code>viajes</code></td>
+<td><code>numeric</code></td>
+<td>The number of trips for that specific origin-destination pair and time slot.</td>
+</tr>
+<tr class="even">
+<td><code>trips_total_length_km</code></td>
+<td><code>viajes_km</code></td>
+<td><code>numeric</code></td>
+<td>The total length of trips in kilometers, summing up all trips between the origin and destination zones.</td>
+</tr>
+<tr class="odd">
+<td><code>year</code></td>
+<td><code>year</code></td>
+<td><code>integer</code></td>
+<td>The year of the recorded data, extracted from the date.</td>
+</tr>
+<tr class="even">
+<td><code>month</code></td>
+<td><code>month</code></td>
+<td><code>integer</code></td>
+<td>The month of the recorded data, extracted from the date.</td>
+</tr>
+<tr class="odd">
+<td><code>day</code></td>
+<td><code>day</code></td>
+<td><code>integer</code></td>
+<td>The day of the recorded data, extracted from the date.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Getting the data</strong></p>
+<p>To access the data, use the <code>spod_get()</code> function. In this example we will use a short interval of dates:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">start =</span> <span class="st">&quot;2022-01-01&quot;</span>, <span class="at">end =</span> <span class="st">&quot;2022-01-04&quot;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>od_dist <span class="ot">&lt;-</span> <span class="fu">spod_get</span>(<span class="at">type =</span> <span class="st">&quot;od&quot;</span>, <span class="at">zones =</span> <span class="st">&quot;dist&quot;</span>, <span class="at">dates =</span> dates)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>od_muni <span class="ot">&lt;-</span> <span class="fu">spod_get</span>(<span class="at">type =</span> <span class="st">&quot;od&quot;</span>, <span class="at">zones =</span> <span class="st">&quot;muni&quot;</span>, <span class="at">dates =</span> dates)</span></code></pre></div>
+</div>
+<p>The data for the specified dates will be automatically downloaded and cached in the <code>SPANISH_OD_DATA_DIR</code> directory. Existing files will not be re-downloaded.</p>
+<p><strong>Working with the data</strong></p>
+<p>The resulting objects <code>od_dist</code> and <code>od_muni</code> are of class <code>tbl_duckdb_connection</code><a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>. Basically, you can treat these as regular <code>data.frame</code>s or <code>tibble</code>s. One important difference is that the data is not actually loaded into memory, because if you requested more dates, e.g. a whole month or a year, all that data would most likely not fit into your computer’s memory. A <code>tbl_duckdb_connection</code> is mapped to the downloaded CSV files that are cached on disk and the data is only loaded in small chunks as needed at the time of computation. You can manipulate <code>od_dist</code> and <code>od_muni</code> using <code>{dplyr}</code> functions such as <code>select()</code>, <code>filter()</code>, <code>mutate()</code>, <code>group_by()</code>, <code>summarise()</code>, etc. In the end of any sequence of commands you will need to add <code>collect()</code> to execute the whole chain of data manipulations and load the results into memory in an R <code>data.frame</code>/<code>tibble</code> like so:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>od_mean_trips_by_ses_over_the_4_days <span class="ot">&lt;-</span> od_dist <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date, age, sex, income) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trips =</span> <span class="fu">sum</span>(n_trips, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age, sex, income) <span class="sc">|&gt;</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">daily_mean_n_trips =</span> <span class="fu">mean</span>(n_trips, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>od_mean_trips_by_ses_over_the_4_days</span></code></pre></div>
+</div>
+<pre><code># A tibble: 39 × 4
+   age   sex    income daily_mean_n_trips
+   &lt;fct&gt; &lt;fct&gt;  &lt;fct&gt;               &lt;dbl&gt;
+ 1 NA    NA     &lt;10              7002485.
+ 2 NA    NA     10-15           16551405.
+ 3 NA    NA     &gt;15              2651481.
+ 4 0-25  NA     &lt;10               539060.
+ 5 0-25  NA     10-15            1950892.
+ 6 0-25  NA     &gt;15               401557.
+ 7 0-25  female &lt;10              1484989.
+ 8 0-25  female 10-15            5357785.
+ 9 0-25  female &gt;15              1764454.
+10 0-25  male   &lt;10              1558461.
+# ℹ 29 more rows
+# ℹ Use `print(n = ...)` to see more rows</code></pre>
+<p>In this example above, becaus the data is with hourly intervals within each day, we first summed the number of trips for each day by age, sex, and income groups. We then grouped the data again dropping the day variable and calculated the mean number of trips per day by age, sex, and income groups. The full data for all 4 days was probably never loaded into memory all at once. Rather the available memory of the computer was used up to its maximum limit to make that calculation happen, without ever exceeding the available memory limit. If you were doing the same opearation on 100 or even more days, it would work in the same way and would be possible even with limited memory. This is done transparantly to the user with the help of <a href="https://duckdb.org/" target="_blank"><code>DuckDB</code></a> (specifically, with <a href="https://r.duckdb.org/index.html" target="_blank">{duckdb} R package</a> <span class="citation" data-cites="duckdb-r">Mühleisen and Raasveldt (2024)</span>).</p>
+<p>The same summary operation as provided in the example above can be done with the entire dataset for multiple years worth of data on a regular laptop with 8-16 GB memory. It will take a bit of time to complete, but it will be done. To speed things up, please also see the <a href="convert.qmd">vignette on converting the data</a> into formats that will increase the analsysis performance.</p>
+<div>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>As long as you use a table connection object created with <code>spod_get()</code> function, it is much quicker to filter the dates by the <code>year</code>, <code>month</code> and <code>day</code> variables, rather than by the <code>date</code> variable. This is because the data for each day is in a separate CSV file located in folders that look like <code>year=2020/month=2/day=14</code>. So when filtering by the <code>date</code> field, R will have to scan all CSV files comparing the specified date with what is stored inside each CSV file. However, if you query by <code>year</code>, <code>month</code> and <code>day</code> variables, R only needs to check these against the path to each CSV file, which is much quicker. This caveat is only relevant as long as you use <code>spod_get()</code> . If you convert (see the <a href="convert.qmd">relevant vignette</a>) the downloaded data to a format that it optimized for quick analysis, you can use whichever field you want, it should not affect the performance.</p>
+</blockquote>
+</div>
+<h2 id="nt-data">2.2. Number of trips data</h2>
+<p>For each location, the “number of trips” data provides the number of individuals who spent the night there, with breakdown by the number of trips made, age, and sex.</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>English Variable Name</strong></th>
+<th><strong>Original Variable Name</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>date</code></td>
+<td><code>fecha</code></td>
+<td><code>Date</code></td>
+<td>The date of the recorded data, formatted as <code>YYYY-MM-DD</code>.</td>
+</tr>
+<tr class="even">
+<td><code>id</code></td>
+<td><code>distrito</code></td>
+<td><code>factor</code></td>
+<td>The identifier of the <code>district</code> or <code>municipality</code> zone.</td>
+</tr>
+<tr class="odd">
+<td><code>age</code></td>
+<td><code>edad</code></td>
+<td><code>factor</code></td>
+<td>The age group of individuals making the trips in <code>n_trips</code>. Categorized into <code>0-25</code>, <code>25-45</code>, <code>45-65</code>, <code>65-100</code>, or <code>NA</code>. The data is partially imputed, for details see <a href="https://www.nommon.es/blog/using-machine-learning-to-predict-sociodemographic-characteristics/">this blogpost</a> by Nommon.</td>
+</tr>
+<tr class="even">
+<td><code>sex</code></td>
+<td><code>sexo</code></td>
+<td><code>factor</code></td>
+<td>The sex of individuals making the trips in <code>n_trips</code>. Categorized into <code>female</code>, <code>male</code>, or <code>NA</code>. The data is partially imputed, for details see <a href="https://www.nommon.es/blog/using-machine-learning-to-predict-sociodemographic-characteristics/">this blogpost</a> by Nommon.</td>
+</tr>
+<tr class="odd">
+<td><code>n_trips</code></td>
+<td><code>numero_viajes</code></td>
+<td><code>factor</code></td>
+<td>The number of individuals who made trips, categorized by <code>0</code>, <code>1</code>, <code>2</code>, or <code>2+</code> trips.</td>
+</tr>
+<tr class="even">
+<td><code>n_persons</code></td>
+<td><code>personas</code></td>
+<td><code>factor</code></td>
+<td>The number of persons making the trips from <code>district</code>, <code>municipality</code>, or <code>large urban area (LUA)</code> with zone <code>id</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>year</code></td>
+<td><code>year</code></td>
+<td><code>integer</code></td>
+<td>The year of the recorded data, extracted from the date.</td>
+</tr>
+<tr class="even">
+<td><code>month</code></td>
+<td><code>month</code></td>
+<td><code>integer</code></td>
+<td>The month of the recorded data, extracted from the date.</td>
+</tr>
+<tr class="odd">
+<td><code>day</code></td>
+<td><code>day</code></td>
+<td><code>integer</code></td>
+<td>The day of the recorded data, extracted from the date.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Getting the data</strong></p>
+<p>To access it use <code>spod_get()</code> with <code>type</code> set to “number_of_trips”, or just “nt”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">start =</span> <span class="st">&quot;2022-01-01&quot;</span>, <span class="at">end =</span> <span class="st">&quot;2022-01-04&quot;</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>nt_dist <span class="ot">&lt;-</span> <span class="fu">spod_get</span>(<span class="at">type =</span> <span class="st">&quot;number_of_trips&quot;</span>, <span class="at">zones =</span> <span class="st">&quot;dist&quot;</span>, <span class="at">dates =</span> dates)</span></code></pre></div>
+</div>
+<p>Because this data is small, we can actually load it completely into memory:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nt_dist_tbl <span class="ot">&lt;-</span> nt_dist <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">collect</span>()</span></code></pre></div>
+</div>
+<h2 id="os-data">2.3. Overnight stays</h2>
+<p>This dataset provides the number of people who spend the night in each location, also identifying their place of residence down to the census district level according to the <a href="https://www.ine.es/ss/Satellite?c=Page&amp;p=1259952026632&amp;pagename=ProductosYServicios%2FPYSLayout&amp;cid=1259952026632&amp;L=1" target="_blank">INE encoding</a>.</p>
+<p>Here are the variables you can find in the <code>district</code>, <code>municipality</code> and <code>large urban area</code> level data:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>English Variable Name</strong></th>
+<th><strong>Original Variable Name</strong></th>
+<th><strong>Type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>date</code></td>
+<td><code>fecha</code></td>
+<td><code>Date</code></td>
+<td>The date of the recorded data, formatted as <code>YYYY-MM-DD</code>.</td>
+</tr>
+<tr class="even">
+<td><code>id_residence</code></td>
+<td><code>zona_residencia</code></td>
+<td><code>factor</code></td>
+<td>The identifier of the census district according to the <a href="https://www.ine.es/ss/Satellite?c=Page&amp;p=1259952026632&amp;pagename=ProductosYServicios%2FPYSLayout&amp;cid=1259952026632&amp;L=1" target="_blank">INE encoding</a>.</td>
+</tr>
+<tr class="odd">
+<td><code>id_overnight_stay</code></td>
+<td><code>zona_pernoctacion</code></td>
+<td><code>factor</code></td>
+<td>The identifier of the <code>district</code>, <code>municipality</code>, or <code>large urban area (LUA)</code> zone.</td>
+</tr>
+<tr class="even">
+<td><code>n_persons</code></td>
+<td><code>personas</code></td>
+<td><code>factor</code></td>
+<td>The number of persons making the trips from <code>district</code>, <code>municipality</code>, or <code>large urban area</code> with zone <code>id</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>year</code></td>
+<td><code>year</code></td>
+<td><code>integer</code></td>
+<td>The year of the recorded data, extracted from the date.</td>
+</tr>
+<tr class="even">
+<td><code>month</code></td>
+<td><code>month</code></td>
+<td><code>integer</code></td>
+<td>The month of the recorded data, extracted from the date.</td>
+</tr>
+<tr class="odd">
+<td><code>day</code></td>
+<td><code>day</code></td>
+<td><code>integer</code></td>
+<td>The day of the recorded data, extracted from the date.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Getting the data</strong></p>
+<p>To access it use <code>spod_get()</code> with <code>type</code> set to “number_of_trips”, or just “nt”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dates <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">start =</span> <span class="st">&quot;2022-01-01&quot;</span>, <span class="at">end =</span> <span class="st">&quot;2022-01-04&quot;</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>os_dist <span class="ot">&lt;-</span> <span class="fu">spod_get</span>(<span class="at">type =</span> <span class="st">&quot;overnight_stays&quot;</span>, <span class="at">zones =</span> <span class="st">&quot;dist&quot;</span>, <span class="at">dates =</span> dates)</span></code></pre></div>
+</div>
+<p>Because this data is small, we can actually load it completely into memory:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>os_dist_tbl <span class="ot">&lt;-</span> os_dist <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">collect</span>()</span></code></pre></div>
+</div>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-mitma_mobility_2024_v8" class="csl-entry" role="listitem">
+MITMS. 2024. <span>“Estudio de Movilidad de Viajeros de Ámbito Nacional Aplicando La Tecnología Big Data. Informe Metodológico (Study of National Traveler Mobility Using Big Data Technology. Methodological Report).”</span> Secretaría de Estado de Transportes y Movilidad Sostenible; Ministerio de Transportes, Movilidad y Agenda Urbana. <a href="https://www.transportes.gob.es/ministerio/proyectos-singulares/estudio-de-movilidad-con-big-data">https://www.transportes.gob.es/ministerio/proyectos-singulares/estudio-de-movilidad-con-big-data</a>.
+</div>
+<div id="ref-duckdb-r" class="csl-entry" role="listitem">
+Mühleisen, Hannes, and Mark Raasveldt. 2024. <em>Duckdb: DBI Package for the DuckDB Database Management System</em>. <a href="https://doi.org/10.32614/CRAN.package.duckdb">https://doi.org/10.32614/CRAN.package.duckdb</a>.
+</div>
+</div>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>For reference: this object also has classes: <code>tbl_dbi</code> ,<code>tbl_sql</code>, <code>tbl_lazy</code> ,and <code>tbl</code> .<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>This is likely the population as of end of 2021 or start of 2022. Population for a few districts is missing. Instead of population, residence and overnight stays data may be used as a proxy with caution. Also, newer population figures may be obtained and joined with the provided zones using the reference tables that match the zones ids with official municipal and census district ids from INE.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>This is likely the population as of end of 2021 or start of 2022. Population for a few districts is missing. Instead of population, residence and overnight stays data may be used as a proxy with caution. Also, newer population figures may be obtained and joined with the provided zones using the reference tables that match the zones ids with official municipal and census district ids from INE.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>This is likely the population as of end of 2021 or start of 2022. Population for a few districts is missing. Instead of population, residence and overnight stays data may be used as a proxy with caution. Also, newer population figures may be obtained and joined with the provided zones using the reference tables that match the zones ids with official municipal and census district ids from INE.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>For reference: this object also has classes: <code>tbl_dbi</code> ,<code>tbl_sql</code>, <code>tbl_lazy</code> ,and <code>tbl</code> .<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+
+
+
+
+</body></html>
