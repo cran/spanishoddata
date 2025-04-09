@@ -23,10 +23,11 @@ od_muni <- spod_get(type = "od", zones = "muni", dates = dates)
 ## -----------------------------------------------------------------------------
 library(dplyr)
 od_mean_hourly_trips_over_the_4_days <- od_dist |>
-  group_by(time_slot) |>
+  group_by(hour) |>
   summarise(
     mean_hourly_trips = mean(n_trips, na.rm = TRUE),
-    .groups = "drop") |> 
+    .groups = "drop"
+  ) |>
   collect()
 od_mean_hourly_trips_over_the_4_days
 

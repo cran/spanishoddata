@@ -1,6 +1,9 @@
 #' Connect to data converted to `DuckDB` or hive-style `parquet` files
 #' 
 #' @description
+#' 
+#' `r lifecycle::badge("stable")`
+#' 
 #' This function allows the user to quickly connect to the data converted to DuckDB with the \link{spod_convert} function. This function simplifies the connection process. The user is free to use the `DBI` and `DuckDB` packages to connect to the data manually, or to use the `arrow` package to connect to the `parquet` files folder.
 #' 
 #' @param data_path a path to the `DuckDB` database file with '.duckdb' extension, or a path to the folder with `parquet` files. Eigher one should have been created with the \link{spod_convert} function.
@@ -37,7 +40,7 @@ spod_connect <- function(
   target_table_name = NULL,
   quiet = FALSE,
   max_mem_gb = max(4, spod_available_ram() - 4),
-  max_n_cpu = parallelly::availableCores() - 1,
+  max_n_cpu = max(1, parallelly::availableCores() - 1),
   temp_path = spod_get_temp_dir()
 ){
   # Validate imputs
@@ -45,7 +48,7 @@ spod_connect <- function(
   checkmate::assert_character(target_table_name, null.ok = TRUE)
   checkmate::assert_flag(quiet)
   checkmate::assert_number(max_mem_gb, lower = 1)
-  checkmate::assert_integerish(max_n_cpu, lower = 1, upper = parallelly::availableCores())
+  checkmate::assert_integerish(max_n_cpu, lower = 1)
   checkmate::assert_directory_exists(temp_path, access = "rw")
 
   # determine if data_path is a folder or a duckdb file
@@ -74,14 +77,14 @@ spod_connect <- function(
     
     if (is.null(target_table_name)) {
       # try the same name as the file name
-      target_table_name = gsub("\\..*", "", basename(duckdb_path)) # experimental
+      target_table_name <- gsub("\\..*", "", basename(duckdb_path)) # experimental
       tables_list <- DBI::dbListTables(con)
       if (target_table_name %in% tables_list) {
         # if the table with the same name exists, use it
-        target_table_name = target_table_name
+        target_table_name <- target_table_name
       } else {
         # pick the first table that does not contain CSV
-        target_table_name = tables_list[!stringr::str_detect(tables_list, "csv")][1]
+        target_table_name <- tables_list[!stringr::str_detect(tables_list, "csv")][1]
       }
     }
     tbl_con <- dplyr::tbl(con, target_table_name)

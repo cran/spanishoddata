@@ -226,7 +226,14 @@ spod_expand_dates_from_regex <- function(date_regex) {
 
 #' Get valid dates for the specified data version
 #' 
+#' @description
+#' 
+#' `r lifecycle::badge("stable")`
+#' 
+#' Get all metadata for requested data version and identify all dates available for download.
+#' 
 #' @inheritParams spod_available_data
+#' 
 #' @return A vector of type `Date` with all possible valid dates for the specified data version (v1 for 2020-2021 and v2 for 2020 onwards).
 #' @export
 #' @examplesIf interactive()
@@ -404,4 +411,56 @@ spod_convert_dates_to_ranges <- function(dates) {
     dplyr::pull(range)
 
   return(range_strings)
+}
+
+#' Get valid dates from the GraphQL API
+#' @return A `Date` vector of dates that are valid to request data with \code{spod_quick_get_od()}.
+#' @keywords internal
+spod_graphql_valid_dates <- function(){
+  graphql_endpoint <- getOption("spanishoddata.graphql_api_endpoint")
+
+  # Define the GraphQL query
+  graphql_query <- list(
+    query = "query { find_date_ranges { start_date, end_date } }",
+    variables = structure(list(), .Names = character(0))  # Empty named list so that it serialises to {} not []
+  )
+
+
+  # Send the POST request
+  response <- httr2::request(graphql_endpoint) |>
+    httr2::req_headers(
+      "Content-Type" = "application/json",  # Ensure correct header
+      "User-Agent" = "R-httr2-client"
+    ) |>
+    httr2::req_body_json(graphql_query) |>  # Pass query as JSON
+    httr2::req_perform()
+
+  # parse the response
+  response_data <- httr2::resp_body_json(response, simplifyVector = TRUE)
+  dates_table <- response_data$data$find_date_ranges |> 
+    dplyr::mutate(end_date = dplyr::if_else(
+      condition = .data$end_date == "2024-09-31",
+      true = "2024-09-30",
+      false = .data$end_date
+    ))
+  
+  dates_table
+
+  # Convert start_date and end_date columns to Date class
+  dates_table$start_date <- as.Date(dates_table$start_date)
+  dates_table$end_date <- as.Date(dates_table$end_date)
+
+  # Generate a single vector of all dates in the intervals
+  # Generate all dates for each interval
+  date_sequences <- mapply(
+    seq.Date,
+    from = dates_table$start_date,
+    to = dates_table$end_date,
+    by = "day"
+  )
+
+  # Flatten the list of date sequences into a single vector and remove duplicates
+  dates <- as.Date(unique(unlist(date_sequences)))
+  
+  return(dates)
 }

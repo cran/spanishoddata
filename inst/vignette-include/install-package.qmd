@@ -6,9 +6,17 @@ execute:
 
 ## Install the package {#install-package}
 
-The package is not yet available on CRAN.
+Install from CRAN:
 
-You can install the latest version of the package from rOpenSpain R universe:
+```{r}
+install.packages("spanishoddata")
+```
+
+
+
+<details><summary>Alternative installation and developemnt</summary>
+
+You can also install the latest development version of the package from rOpenSpain R universe:
 
 ```{r}
 install.packages("spanishoddata",
@@ -17,10 +25,7 @@ install.packages("spanishoddata",
 ```
 
 
-<details><summary>Alternative installation and developemnt</summary>
-
-
-Alternative way to install the package from GitHub:
+Alternative way to install the development version from GitHub:
 
 ```{r}
 if (!require("remotes")) install.packages("remotes")

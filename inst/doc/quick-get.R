@@ -1,6 +1,7 @@
 ## -----------------------------------------------------------------------------
 library(spanishoddata)
 library(dplyr)
+library(stringr)
 
 
 ## -----------------------------------------------------------------------------
@@ -40,8 +41,8 @@ head(municipalities)
 
 
 ## -----------------------------------------------------------------------------
-madrid_muni_ids <- municipalities |> 
-  filter(str_detect(name, "Madrid")) |> 
+madrid_muni_ids <- municipalities |>
+  filter(str_detect(name, "Madrid")) |>
   pull(id)
 
 madrid_muni_ids
@@ -60,8 +61,8 @@ glimpse(flows_from_Madrid)
 
 
 ## -----------------------------------------------------------------------------
-barcelona_muni_ids <- municipalities |> 
-  filter(str_detect(name, "Barcelona")) |> 
+barcelona_muni_ids <- municipalities |>
+  filter(str_detect(name, "Barcelona")) |>
   pull(id)
 barcelona_muni_ids
 

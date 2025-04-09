@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.6.43">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -105,27 +105,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
    
   <ul>
   <li><a href="#intro" id="toc-intro"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#setup" id="toc-setup"><span class="header-section-number">2</span> Setup</a>
-  <ul>
-  <li><a href="#set-data-folder" id="toc-set-data-folder"><span class="header-section-number">2.1</span> Set the data directory</a></li>
-  </ul></li>
-  <li><a href="#get-data" id="toc-get-data"><span class="header-section-number">3</span> Get the data</a>
-  <ul>
-  <li><a href="#get-all-flows-with-at-least-1000-trips" id="toc-get-all-flows-with-at-least-1000-trips"><span class="header-section-number">3.1</span> Get all flows with at least 1000 trips</a></li>
-  <li><a href="#get-only-trips-of-certain-length" id="toc-get-only-trips-of-certain-length"><span class="header-section-number">3.2</span> Get only trips of certain length</a></li>
-  <li><a href="#get-only-trips-between-certain-municipalities" id="toc-get-only-trips-between-certain-municipalities"><span class="header-section-number">3.3</span> Get only trips between certain municipalities</a></li>
-  </ul></li>
+  <li><a href="#setup" id="toc-setup"><span class="header-section-number">2</span> Setup</a></li>
+  <li><a href="#set-data-folder" id="toc-set-data-folder"><span class="header-section-number">3</span> Set the data directory</a></li>
+  <li><a href="#get-data" id="toc-get-data"><span class="header-section-number">4</span> Get the data</a></li>
   </ul>
 </nav>
-<h1 data-number="1" id="intro"><span class="header-section-number">1</span> Introduction</h1>
-<p>This vignette demonstrates how to get minimal daily aggregated data on the number of trips between municipalities using the <code>spod_quick_get_od()</code> function. With this function, you only get total trips for a single day, and no additional variables that are available in the full <a href="v2-2022-onwards-mitma-data-codebook.html">v2 (2022 onwards) data set</a>. The advantage of this function is that it is much faster than downloading the full data from source CSV files using <code>spod_get()</code>, as each CSV file for a single day is about 200 MB in size. Also, this way of getting the data is much less demanding on your computer as you are only getting a small table from the internet (less than 1 MB), and no data processing (such as aggregation from more detailed hourly data with extra columns that is happening when you use <code>spod_get()</code> function) is required on your computer.</p>
-<h1 data-number="2" id="setup"><span class="header-section-number">2</span> Setup</h1>
+<h2 data-number="1" id="intro"><span class="header-section-number">1</span> Introduction</h2>
+<p>This vignette demonstrates how to get minimal daily aggregated data on the number of trips between municipalities using the <code>spod_quick_get_od()</code> function. With this function, you only get total trips for a single day, and no additional variables that are available in the full <a href="v2-2022-onwards-mitma-data-codebook.html">v2 (2022 onwards) data set</a>. The advantage of this function is that it is much faster than downloading the full data from source CSV files using <code>spod_get()</code>, as each CSV file for a single day is about 200 MB in size. Also, this way of getting the data is much less demanding on your computer as you are only getting a small table from the internet (less than 1 MB), and no data processing (such as aggregation from more detailed hourly data with extra columns that is happening when you use <code>spod_get()</code> function) is required on your computer. The original interactive web map with this data is available at <a href="https://mapas-movilidad.transportes.gob.es/" target="_blank">https://mapas-movilidad.transportes.gob.es/</a>.</p>
+<h2 data-number="2" id="setup"><span class="header-section-number">2</span> Setup</h2>
 <p>Make sure you have loaded the package:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spanishoddata)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code></pre></div>
 </div>
-<h2 data-number="2.1" id="set-data-folder"><span class="header-section-number">2.1</span> Set the data directory</h2>
+<h2 data-number="3" id="set-data-folder"><span class="header-section-number">3</span> Set the data directory</h2>
 <p>Choose where <code>{spanishoddata}</code> should download (and convert) the data by setting the data directory following command:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spod_set_data_dir</span>(<span class="at">data_dir =</span> <span class="st">&quot;~/spanish_od_data&quot;</span>)</span></code></pre></div>
@@ -157,8 +151,8 @@ Setting data directory for advanced users
 <p>Setting a local data directory in this case is optional, as the data is downloaded directly from the web API and there is no caching on disk. However, the metadata will be downloaded to check the range of valid dates available at the time of the request. So metadata will be downloaded to a temporary location by default, or to the data directory, if you do set it.</p>
 </blockquote>
 </div>
-<h1 data-number="3" id="get-data"><span class="header-section-number">3</span> Get the data</h1>
-<h2 data-number="3.1" id="get-all-flows-with-at-least-1000-trips"><span class="header-section-number">3.1</span> Get all flows with at least 1000 trips</h2>
+<h2 data-number="4" id="get-data"><span class="header-section-number">4</span> Get the data</h2>
+<h3 data-number="4.1" id="get-all-flows-with-at-least-1000-trips"><span class="header-section-number">4.1</span> Get all flows with at least 1000 trips</h3>
 <p>To get the data, use the <code>spod_quick_get_od()</code> function. There is no need to specify whether you need municipalities or districts, as the only municipal level data can be accessed with this function. The <code>min_trips</code> argument specifies the minimum number of trips to include in the data. If you set <code>min_trips</code> to 0, you will get all data for all origin-destination pairs for the specified date.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>od_1000 <span class="ot">&lt;-</span> <span class="fu">spod_quick_get_od</span>(</span>
@@ -196,7 +190,7 @@ $ trips_total_length_km &lt;int&gt; 27130, 13743, 26700, 10603, 12228, 69999,…
 10 2022-01-01 01017_AM  01017_AM          1847                 12695
 # ℹ 8,514 more rows
 # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<h2 data-number="3.2" id="get-only-trips-of-certain-length"><span class="header-section-number">3.2</span> Get only trips of certain length</h2>
+<h3 data-number="4.2" id="get-only-trips-of-certain-length"><span class="header-section-number">4.2</span> Get only trips of certain length</h3>
 <p>To get only trips of a certain length, use the <code>distances</code> argument.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>od_long <span class="ot">&lt;-</span> <span class="fu">spod_quick_get_od</span>(</span>
@@ -233,18 +227,18 @@ $ trips_total_length_km &lt;int&gt; 339, 161, 924, 5052, 2955, 2453, 29630, 1…
 10 2022-01-01 08015     08902              166                  2042
 # ℹ 247,198 more rows
 # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<h2 data-number="3.3" id="get-only-trips-between-certain-municipalities"><span class="header-section-number">3.3</span> Get only trips between certain municipalities</h2>
+<h3 data-number="4.3" id="get-only-trips-between-certain-municipalities"><span class="header-section-number">4.3</span> Get only trips between certain municipalities</h3>
 <p>To get only trips between certain municipalities, use the <code>id_origin</code> and <code>id_destination</code> arguments.</p>
 <p>You can get all valid munincipality identifiers with the <code>spod_get_zones(&quot;muni&quot;, ver = 2)</code> function. This function will need to download some spatial data, so it might take some time and you might want to <a href="#setup">setup the data download folder</a> with <code>spod_setup_cache()</code> if you have not done so before.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>municipalities <span class="ot">&lt;-</span> <span class="fu">spod_get_zones</span>(<span class="st">&quot;muni&quot;</span>, <span class="at">ver =</span> <span class="dv">2</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(municipalities)</span></code></pre></div>
 </div>
-<h3 data-number="3.3.1" id="all-trips-from-madrid"><span class="header-section-number">3.3.1</span> All trips from Madrid</h3>
+<h4 data-number="4.3.1" id="all-trips-from-madrid"><span class="header-section-number">4.3.1</span> All trips from Madrid</h4>
 <p>Let us select all locations with Madrid in the name:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>madrid_muni_ids <span class="ot">&lt;-</span> municipalities <span class="sc">|&gt;</span> </span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">&quot;Madrid&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>madrid_muni_ids <span class="ot">&lt;-</span> municipalities <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">&quot;Madrid&quot;</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(id)</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>madrid_muni_ids</span></code></pre></div>
@@ -283,11 +277,11 @@ $ trips_total_length_km &lt;int&gt; 11120, 7268, 75798, 3385, 82, 296, 1036, …
 10 2022-01-01 28073     46120_AM             2                   631
 # ℹ 2,222 more rows
 # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<h3 data-number="3.3.2" id="all-trips-from-madrid-to-barcelona"><span class="header-section-number">3.3.2</span> All trips from Madrid to Barcelona</h3>
+<h4 data-number="4.3.2" id="all-trips-from-madrid-to-barcelona"><span class="header-section-number">4.3.2</span> All trips from Madrid to Barcelona</h4>
 <p>Similarly, you can set limits on the destination municipalities:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>barcelona_muni_ids <span class="ot">&lt;-</span> municipalities <span class="sc">|&gt;</span> </span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">&quot;Barcelona&quot;</span>)) <span class="sc">|&gt;</span> </span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>barcelona_muni_ids <span class="ot">&lt;-</span> municipalities <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(name, <span class="st">&quot;Barcelona&quot;</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(id)</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>barcelona_muni_ids</span></code></pre></div>
 </div>

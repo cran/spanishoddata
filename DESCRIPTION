@@ -1,6 +1,6 @@
 Package: spanishoddata
 Title: Get Spanish Origin-Destination Data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Egor", "Kotov", , "kotov.egor@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6690-5345")),
@@ -25,10 +25,10 @@ License: MIT + file LICENSE
 URL: https://rOpenSpain.github.io/spanishoddata/,
         https://github.com/rOpenSpain/spanishoddata
 BugReports: https://github.com/rOpenSpain/spanishoddata/issues
-Depends: R (>= 3.5.0)
+Depends: R (>= 4.1.0)
 Imports: checkmate, curl (>= 5.0.0), DBI, dplyr, duckdb (>= 0.5.0), fs,
-        glue, here, httr2, lubridate, memuse, parallelly, purrr, readr,
-        rlang, sf, stats, stringr, tibble, xml2
+        glue, here, httr2, lifecycle, lubridate, memuse, parallelly,
+        purrr, readr, rlang, sf, stats, stringr, tibble, xml2
 Suggests: flowmapblue, flowmapper (>= 0.1.2), furrr, future,
         hexSticker, mapSpain, quarto, remotes, scales, testthat (>=
         3.0.0), tidyverse
@@ -38,10 +38,10 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2024-12-17 11:48:19 UTC; ek
+Packaged: 2025-04-08 16:32:19 UTC; ek
 Author: Egor Kotov [aut, cre] (<https://orcid.org/0000-0001-6690-5345>),
   Robin Lovelace [aut] (<https://orcid.org/0000-0001-5679-6536>),
   Eugeni Vidal-Tortosa [ctb] (<https://orcid.org/0000-0001-5199-4103>)
 Maintainer: Egor Kotov <kotov.egor@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-12-18 15:40:02 UTC
+Date/Publication: 2025-04-09 13:00:02 UTC
