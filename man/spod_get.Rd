@@ -11,7 +11,7 @@ spod_get(
   dates = NULL,
   data_dir = spod_get_data_dir(),
   quiet = FALSE,
-  max_mem_gb = max(4, spod_available_ram() - 4),
+  max_mem_gb = NULL,
   max_n_cpu = max(1, parallelly::availableCores() - 1),
   max_download_size_gb = 1,
   duckdb_target = ":memory:",
@@ -43,7 +43,7 @@ The possible values can be any of the following:
 
 \item{quiet}{A \code{logical} value indicating whether to suppress messages. Default is \code{FALSE}.}
 
-\item{max_mem_gb}{The maximum memory to use in GB. A conservative default is 3 GB, which should be enough for resaving the data to \code{DuckDB} form a folder of CSV.gz files while being small enough to fit in memory of most even old computers. For data analysis using the already converted data (in \code{DuckDB} or Parquet format) or with the raw CSV.gz data, it is recommended to increase it according to available resources.}
+\item{max_mem_gb}{\code{integer} value of the maximum operating memory to use in GB. \code{NULL} by default, delegates the choice to the \code{DuckDB} engine which usually sets it to 80\% of available memory. Caution, in HPC use, the amount of memory available to your job may be determined incorrectly by the \code{DuckDB} engine, so it is recommended to set this parameter explicitly according to your job's memory limits.}
 
 \item{max_n_cpu}{The maximum number of threads to use. Defaults to the number of available cores minus 1.}
 
@@ -61,11 +61,11 @@ A DuckDB lazy table connection object of class \code{tbl_duckdb_connection}.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-This function creates a DuckDB lazy table connection object from the specified type and zones. It checks for missing data and downloads it if necessary. The connnection is made to the raw CSV files in gzip archives, so analysing the data through this connection may be slow if you select more than a few days. You can manipulate this object using \code{dplyr} functions such as \link[dplyr]{select}, \link[dplyr]{filter}, \link[dplyr]{mutate}, \link[dplyr]{group_by}, \link[dplyr]{summarise}, etc. In the end of any sequence of commands you will need to add \link[dplyr]{collect} to execute the whole chain of data manipulations and load the results into memory in an R \code{data.frame}/\code{tibble}. See codebooks for v1 and v2 data in vignettes with \link{spod_codebook}(1) and \link{spod_codebook}(2).
+This function creates a DuckDB lazy table connection object from the specified type and zones. It checks for missing data and downloads it if necessary. The connnection is made to the raw CSV files in gzip archives, so analysing the data through this connection may be slow if you select more than a few days. You can manipulate this object using \code{dplyr} functions such as \code{\link[dplyr]{select}}, \code{\link[dplyr]{filter}}, \code{\link[dplyr]{mutate}}, \code{\link[dplyr]{group_by}}, \code{\link[dplyr]{summarise}}, etc. In the end of any sequence of commands you will need to add \code{\link[dplyr]{collect}} to execute the whole chain of data manipulations and load the results into memory in an R \code{data.frame}/\code{tibble}. See codebooks for v1 and v2 data in vignettes with \code{\link{spod_codebook}(1)} and \code{\link{spod_codebook}(2)}.
 
-If you want to analyse longer periods of time (especiially several months or even the whole data over several years), consider using the \link{spod_convert} and then \link{spod_connect}.
+If you want to analyse longer periods of time (especiially several months or even the whole data over several years), consider using the \code{\link{spod_convert}} and then \code{\link{spod_connect}}.
 
-If you want to quickly get the origin-destination data with flows aggregated for a single day at municipal level and without any extra socio-economic variables, consider using the \link[spanishoddata]{spod_quick_get_od} function.
+If you want to quickly get the origin-destination data with flows aggregated for a single day at municipal level and without any extra socio-economic variables, consider using the \code{\link{spod_quick_get_od}} function.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

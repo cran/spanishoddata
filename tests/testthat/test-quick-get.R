@@ -9,6 +9,7 @@ test_that("spod_quick_get_od fails out of range dates", {
   )
 })
 
+
 test_that("spod_quick_get_od fails on invalid date format", {
   expect_error(
     spod_quick_get_od(
@@ -44,23 +45,23 @@ test_that("spod_quick_get_od fails on invalid municipality IDs", {
       date = "2022-01-03",
       id_origin = "invalid"
     ),
-    ".*Invalid municipality IDs detected.*"
+    ".*Invalid municipality ID.*"
   )
-  
+
   expect_error(
     spod_quick_get_od(
       date = "2022-01-04",
       id_destination = "invalid"
     ),
-    ".*Invalid municipality IDs detected.*"
+    ".*Invalid municipality ID.*"
   )
-  
+
   expect_error(
     spod_quick_get_od(
       date = "2022-01-05",
       id_origin = "invalid",
       id_destination = "invalid"
     ),
-    ".*Invalid municipality IDs detected.*"
+    ".*Invalid municipality ID.*"
   )
 })

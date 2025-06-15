@@ -36,8 +36,11 @@ od_long
 
 
 ## -----------------------------------------------------------------------------
-municipalities <- spod_get_zones("muni", ver = 2)
-head(municipalities)
+municipalities <- spod_quick_get_zones()
+
+# if code above fails, you can also use the following:
+# municipalities <- spod_get_zones("muni", ver = 2)
+# head(municipalities)
 
 
 ## -----------------------------------------------------------------------------
