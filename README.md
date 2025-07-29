@@ -567,6 +567,11 @@ BibTeX:
       url = {https://cdn.mitma.gob.es/portal-web-drupal/covid-19/bigdata/mitma_-_estudio_movilidad_covid-19_informe_metodologico_v3.pdf},
     }
 
+### Working with Python?
+
+Try the new work-in-progress package:
+<https://github.com/pySpainMobility/pySpainMobility>.
+
 ## References
 
 <!-- metadata for better search engine indexing -->

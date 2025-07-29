@@ -1,6 +1,6 @@
 Package: spanishoddata
 Title: Get Spanish Origin-Destination Data
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Egor", "Kotov", , "kotov.egor@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6690-5345")),
@@ -39,11 +39,11 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 RoxygenNote: 7.3.2
 NeedsCompilation: no
-Packaged: 2025-06-15 20:00:52 UTC; ek
+Packaged: 2025-07-29 10:26:40 UTC; ek
 Author: Egor Kotov [aut, cre] (ORCID: <https://orcid.org/0000-0001-6690-5345>),
   Robin Lovelace [aut] (ORCID: <https://orcid.org/0000-0001-5679-6536>),
   Eugeni Vidal-Tortosa [ctb] (ORCID:
     <https://orcid.org/0000-0001-5199-4103>)
 Maintainer: Egor Kotov <kotov.egor@gmail.com>
 Repository: CRAN
-Date/Publication: 2025-06-15 23:20:02 UTC
+Date/Publication: 2025-07-29 10:50:01 UTC
