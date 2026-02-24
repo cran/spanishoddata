@@ -4,7 +4,7 @@ vignette: >
   %\VignetteIndexEntry{Codebook and cookbook for v2 (2022 onwards) Spanish mobility data}
   %\VignetteEngine{quarto::html}
   %\VignetteEncoding{UTF-8}
-bibliography: references.bib
+bibliography: ../inst/REFERENCES.bib
 format:
   html:
     toc: true
@@ -17,7 +17,7 @@ execute:
 You can view this vignette any time by running:
 
 ```{r}
-spanishoddata::spod_codebook(ver = 2)
+spod_codebook(ver = 2)
 ```
 
 The mobility data v2 (2022 onwards) was originally released by the Ministerio de Transportes, Movilidad y Agenda Urbana (MITMA) , now [Ministerio de Transportes y Movilidad Sostenible (MITMS)](https://www.transportes.gob.es/) [@mitms_methodology_2022_v8].
@@ -165,7 +165,7 @@ Here are the variables you can find in the `district`, `municipality` and `large
 | **English Variable Name** | **Original Variable Name** | **Type** | **Description** |
 |---------|---------|---------|---------------------------------------------|
 | `date` | `fecha` | `Date` | The date of the recorded data, formatted as `YYYY-MM-DD`. |
-| `hour` | `periodo` | `integer` | The time slot during which the trips occurred. *Note*: this column used to be called `time_slot`, it is still going to be available in the output of package functions until the end of 2025, but going forward please use `hour` instead. |
+| `hour` | `periodo` | `integer` | The time slot during which the trips occurred. |
 | `id_origin` | `origen` | `factor` | The origin zone `id` of `district`, `municipality`, or `large urban area`. |
 | `id_destination` | `destino` | `factor` | The destination zone `id` of `district`, `municipality`, or `large urban area`. |
 | `distance` | `distancia` | `factor` | The distance range of the trip, categorized into specific intervals such as `0.5-2` (500 m to 2 km), `2-10` (2-10 km), `10-50` (10-50km), and `>50` (50 or more km). |
@@ -208,11 +208,13 @@ od_mean_trips_by_ses_over_the_4_days <- od_dist |>
   group_by(date, age, sex, income) |>
   summarise(
     n_trips = sum(n_trips, na.rm = TRUE),
-    .groups = "drop") |> 
+    .groups = "drop"
+  ) |>
   group_by(age, sex, income) |>
   summarise(
     daily_mean_n_trips = mean(n_trips, na.rm = TRUE),
-    .groups = "drop") |> 
+    .groups = "drop"
+  ) |>
   collect()
 od_mean_trips_by_ses_over_the_4_days
 ```
@@ -274,14 +276,14 @@ nt_dist_tbl <- nt_dist |> dplyr::collect()
 
 ### 2.3. Population by overnight stay data {#pos-data}
 
-This dataset provides the number of people who spend the night in each location, also identifying their place of residence down to the census district level according to the [INE encoding](https://www.ine.es/ss/Satellite?c=Page&p=1259952026632&pagename=ProductosYServicios%2FPYSLayout&cid=1259952026632&L=1){target="_blank"}.
+This dataset provides the number of people who spend the night in each location, also identifying their place of residence down to the census district level according to the [INE encoding](https://www.ine.es/dyngs/SER/en/index.htm?cid=1389){target="_blank"}.
 
 Here are the variables you can find in the `district`, `municipality` and `large urban area` level data:
 
 | **English Variable Name** | **Original Variable Name** | **Type** | **Description** |
 |-----------------|-----------------|-----------------|----------------------|
 | `date` | `fecha` | `Date` | The date of the recorded data, formatted as `YYYY-MM-DD`. |
-| `id_residence` | `zona_residencia ` | `factor` | The identifier of the census district according to the [INE encoding](https://www.ine.es/ss/Satellite?c=Page&p=1259952026632&pagename=ProductosYServicios%2FPYSLayout&cid=1259952026632&L=1){target="_blank"}. |
+| `id_residence` | `zona_residencia ` | `factor` | The identifier of the census district according to the [INE encoding](https://www.ine.es/dyngs/SER/en/index.htm?cid=1389){target="_blank"}. |
 | `id_overnight_stay` | `zona_pernoctacion ` | `factor` | The identifier of the `district`, `municipality`, or `large urban area (LUA)` zone. |
 | `n_persons` | `personas` | `factor` | The number of persons making the trips from `district`, `municipality`, or `large urban area` with zone `id`. |
 | `year` | `year` | `integer` | The year of the recorded data, extracted from the date. |

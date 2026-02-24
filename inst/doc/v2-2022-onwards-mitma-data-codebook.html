@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -105,7 +105,7 @@ margin-left: 2em;
 </nav>
 <p>You can view this vignette any time by running:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>spanishoddata<span class="sc">::</span><span class="fu">spod_codebook</span>(<span class="at">ver =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">spod_codebook</span>(<span class="at">ver =</span> <span class="dv">2</span>)</span></code></pre></div>
 </div>
 <p>The mobility data v2 (2022 onwards) was originally released by the Ministerio de Transportes, Movilidad y Agenda Urbana (MITMA) , now <a href="https://www.transportes.gob.es/">Ministerio de Transportes y Movilidad Sostenible (MITMS)</a> <span class="citation" data-cites="mitms_methodology_2022_v8">(Ministerio de Transportes y Movilidad Sostenible (MITMS) 2024)</span>.</p>
 <p>The dataset is produced by <a href="https://www.nommon.es/" target="_blank">Nommon</a> using the raw data from <a href="https://www.orange.es/" target="_blank">Orange España</a>. Even though the raw data is only from one mobile phone operator, the resulting flows and other counts of number of individuals in the data set are already resampled to be representative of the total population of Spain (see details in the official methodology).</p>
@@ -169,6 +169,7 @@ Alternative installation and developemnt
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>()</span></code></pre></div>
 </div>
 </details>
+<p>You can also explore the package and the data in an interactive RStudio container right in your web browser thanks to Binder, just click <a href="https://mybinder.org/v2/gh/e-kotov/spanishoddata-playground/HEAD?urlpath=rstudio">the link</a> or the button: <a href="https://mybinder.org/v2/gh/e-kotov/spanishoddata-playground/HEAD?urlpath=rstudio"><img role="img" aria-label="Binder" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTA5IiBoZWlnaHQ9IjIwIj48bGluZWFyR3JhZGllbnQgaWQ9ImIiIHgyPSIwIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjYmJiIiBzdG9wLW9wYWNpdHk9Ii4xIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLW9wYWNpdHk9Ii4xIi8+PC9saW5lYXJHcmFkaWVudD48Y2xpcFBhdGggaWQ9ImEiPjxyZWN0IHdpZHRoPSIxMDkiIGhlaWdodD0iMjAiIGZpbGw9IiNmZmYiIHJ4PSIzIi8+PC9jbGlwUGF0aD48ZyBjbGlwLXBhdGg9InVybCgjYSkiPjxwYXRoIGZpbGw9IiM1NTUiIGQ9Ik0wIDBoNjR2MjBIMHoiLz48cGF0aCBmaWxsPSIjNTc5YWNhIiBkPSJNNjQgMGg0NXYyMEg2NHoiLz48cGF0aCBmaWxsPSJ1cmwoI2IpIiBkPSJNMCAwaDEwOXYyMEgweiIvPjwvZz48ZyBmaWxsPSIjZmZmIiBmb250LWZhbWlseT0iRGVqYVZ1IFNhbnMsVmVyZGFuYSxHZW5ldmEsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMTAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPjxpbWFnZSB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHg9IjUiIHk9IjMiIHhsaW5rOmhyZWY9ImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBRmtBQUFCWkNBTUFBQUJpMVhpZEFBQUI4bEJNVkVYLy8vOVhtc3JtWllIMW9sSlhtc3Ixb2xKWG1zcm1aWUgxb2xKWG1zcjFvbEpYbXNybVpZSDFvbEwxb2xKWG1zcjFvbEpYbXNybVpZSDFvbEwxb2xKWG1zcm1aWUgxb2xKWG1zcjFvbEwxb2xKWG1zcm1aWUgxb2xMMW9sSlhtc3JtWllIMW9sTDFvbEwwbkZmMW9sSlhtc3JtWllIMW9sSlhtc3E4ZFpiMW9sSlhtc3JtWllIMW9sSlhtc3BYbXNwWG1zcjFvbEwxb2xKWG1zcm1aWUgxb2xKWG1zcjFvbEwxb2xKWG1zcm1aWUgxb2xMMW9sTGVhSVZYbXNybVpZSDFvbEwxb2xMMW9sSlhtc3JtWllIMW9sTG5hMzFYbXNyMW9sSlhtc3Ixb2xKWG1zcm1aWUgxb2xMcW9WcjFvbEpYbXNyMW9sSlhtc3JtWllIMW9sTDFvbEtrZmFQb2JYdnZpR2FiZ2FkWG1zcVRoS3VvZktIbVo0RG9ibnIxb2xKWG1zcjFvbEpYbXNwWG1zcjFvbEpYbXNyZlo0VHVoV24xb2xMMW9sSlhtc3FCaTdYMW9sSlhtc3BabXNsYm1NaGJtc2RlbXNWZmw4Wmdtc05pbThKcGs4RjBtN1I0bTdGNW5MQjZqYmg3amJpRGlyT0VpYk9HbkthTWhxK1BuYUNWZzZxV2c2cWVnS2FmZjZXaG5wS29mS0d0bm9teGVaeTNub0c2ZFppK24zdkNjcFBEY3BQR24zYkxiNC9NYjQ3VWJJclZhNHJZb0dqZGFJYmVhSVhob1dIbVpZSG9iWHZwY0hqcWRIWHJlSExyb1Zyc2ZHL3VoR251aDJid2oySHhrMTd5bDF2em1sanptMWowbmxYMW9sTDNBSlhXQUFBQWJYUlNUbE1BRUJBUUh4OGdJQ0F1TGpBd01EdzlQVUJBUUVwUVVGQlhWMWhnWUdCa2NIQndjWGw4Z0lDQWdvaUlrSkNRbEppY25KMmdvS0NtcUsrd3NMQzR1c0RBd01qUDBORFExTmJXM056ZzRPRGk1KzN2OFBEdzgvVDA5UFgyOXZiMzkvZjUrZnI3Ky96OC9QejkvdjcremN6Q3hnQUFCQzVKUkVGVWVBSE4xdWwzazBVVUJ2Q2IxQ1RWcG1wYWl0QUdTTFNwU3VLQ0xXcGJUS05KRkdsY1NNQUZGNjNpVW1SY2NORzZnTGJ1eGtYVTY2SkFVZWYvOUxTcG1YbnlMcjNUNUFPL3J6bDV6ajEzN3AxMzZCSVN5NDRmS0pYdUdOL2QxOVBVZlllTzY3Wm5xdGYyS0gzM0lkMXBzWG9GZFczMHNQWjFzTXZzMkQwNjBBSHF3czRGSGVKb2pMWnFudzUzY21mdmcrWFI4bUMwT0VqdXhyWEVrWDV5ZGVWSkxWSWxWMGUxMFBYazVrN2RZZUh1N0NqMWorNDl1S2c3dUxVNjF0R0x3MWxxMjd1Z1FZbGNsSEM0Ymd2N1ZRK1RBeWo1WmMvVWpzUHZzMXNkNWNXcnlXT2J0dldUMkVQYTRydG5XVzNKa3BqZ2dFcGJPc1ByN0Y3RXlOZXd0cEJJc2xBN3A0M0hDc253b29YVEVjM1VtUG1DTm41bHJxVEp4eTZuUm1jYXZHWlZ0LzNEYTJwRDVOSHZzT0hKQ3JkYzFHMnIzRElUcFU3eWljN3cvN1J4bmpjMGt0NUdDNGRqaXYyU3ozRmIyaUVaZzQxL2Rkc0ZEb3l1WXJJa21GZWh6MEhSMnRoUGdRcU15UVliMk90QjBXeHNaM0JlRzMrd3BSYjF2emwyVVlCb2c4RmZHaHR0RktqdEFjbG5aWXJSbzlyeUc5dUcvRlpRVTRBRWc4WkU5TGpHTXpUbXFLWFBMbmxXVm5JbFFRVHZ4SmY4aXA3VmdqWmp5VlByancxdGU1b3RNN1JtUDd4bStzSzJHdjlJOEdpKytCUmJFa1I5RUJ3OHpSVWNLeHdwNzN4a2FMaXFRYitrR2R1SlROSEc3MnpjVzlMb0pncVF4cFAzL1RqLy9jM3lCMHRxemFtbDA1LytvckhMa3NWTys5NWtYNy83cWdKdm5qbHJmcjJHZ3N5eDBlb3k5dVB6TjVTUGQ4NmFYZ2dPc0VLVzJQcno3ZHUzVklEMy90enMvc1NSczJ3N292VkhLdGpyWDJwZDdaTWxUeEFZZkJBTDlqaUR3ZkxrcTU1VG03aWZoTWxUR1B5Q0FzN1JGUmhuNDdKbmxjQjlSTTVUOTdBU3VaWEljVk51VURJbmRwRGJkc2ZycXNPcHBlWGw1WStYVktkakZDVGgrekdhVnVqMGQ5enkwNVBQSzNRekJhbXhkd3RUQ3J6eWcvMlJ2ZjJFc3RVam9yZEd3YS9reDltU0pMcjhtTEx0Q1c4SEhHSmMyUjVoUzIxOUlpRjZQblR1c09xY01sNTdnbTBaOGthbktNQVFnMHFTeXVaZm43ekl0c2JHeU85UWxueFkwZUN1RDFYTDJ5cy9Nc3JRaGx0RTdVZzB1Rk96dWZKRkUyUHhCby9ZQXg4WFBQZER3V04wTXJEUllJWkYwbVNNS0NOSGdhSVZGb0JiTm9MSjd0RVFES3hHRjBrY0xRaW1vakNab3B2ME9rTk95V0NDZzlYTVZBaTdBUkp6UWRNMlFVaDBnbUJvempjM1NrZzZkU0JScURHWVNVT3U2NlpnK0kyZk5acy9NMy9mL0dybC9YbnlGMUd3M1ZLQ2V6MFBONUlVZkZMcXZnVU40QzBxTnFZczVZaFBMK2FWWllERTRJcFVrNTdvU0ZuSm00RnlDcXFPRTBqaFkyU015TEZvbzU2enlvNmJlY09TNVVWRGRqN1ZpaDB6cCt0Y01od1JwQmVMeXF0SWpsSktBSVpTYkk4U0dTRjNrMHBBM21SNXRIdXdQRm9hN043cmVvcTJicUNzQWsxSHFDdTV1dkkxbjZKdVJYSStTMU1jbzU0WW1ZVHdjbjZBZWljK2tzc1hpOFhwWEM0VjN0Ny9BRHVUTkthUUpkU2NBQUFBQUVsRlRrU3VRbUNDIi8+PHRleHQgeD0iNDE1IiB5PSIxNTAiIGZpbGw9IiMwMTAxMDEiIGZpbGwtb3BhY2l0eT0iLjMiIHRleHRMZW5ndGg9IjM3MCIgdHJhbnNmb3JtPSJzY2FsZSguMSkiPmxhdW5jaDwvdGV4dD48dGV4dCB4PSI0MTUiIHk9IjE0MCIgdGV4dExlbmd0aD0iMzcwIiB0cmFuc2Zvcm09InNjYWxlKC4xKSI+bGF1bmNoPC90ZXh0Pjx0ZXh0IHg9Ijg1NSIgeT0iMTUwIiBmaWxsPSIjMDEwMTAxIiBmaWxsLW9wYWNpdHk9Ii4zIiB0ZXh0TGVuZ3RoPSIzNTAiIHRyYW5zZm9ybT0ic2NhbGUoLjEpIj5iaW5kZXI8L3RleHQ+PHRleHQgeD0iODU1IiB5PSIxNDAiIHRleHRMZW5ndGg9IjM1MCIgdHJhbnNmb3JtPSJzY2FsZSguMSkiPmJpbmRlcjwvdGV4dD48L2c+PC9zdmc+" alt="Binder"></a>. Note that the session will be limited by memory and you will only be able to work with one full day of data.</p>
 <p>Load it as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spanishoddata)</span></code></pre></div>
@@ -408,7 +409,7 @@ Figure 1: The overview of package functions to get the data
 <td><code>hour</code></td>
 <td><code>periodo</code></td>
 <td><code>integer</code></td>
-<td>The time slot during which the trips occurred. <em>Note</em>: this column used to be called <code>time_slot</code>, it is still going to be available in the output of package functions until the end of 2025, but going forward please use <code>hour</code> instead.</td>
+<td>The time slot during which the trips occurred.</td>
 </tr>
 <tr class="odd">
 <td><code>id_origin</code></td>
@@ -530,13 +531,15 @@ Figure 1: The overview of package functions to get the data
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date, age, sex, income) <span class="sc">|&gt;</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trips =</span> <span class="fu">sum</span>(n_trips, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age, sex, income) <span class="sc">|&gt;</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">daily_mean_n_trips =</span> <span class="fu">mean</span>(n_trips, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>od_mean_trips_by_ses_over_the_4_days</span></code></pre></div>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age, sex, income) <span class="sc">|&gt;</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">daily_mean_n_trips =</span> <span class="fu">mean</span>(n_trips, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">&quot;drop&quot;</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>od_mean_trips_by_ses_over_the_4_days</span></code></pre></div>
 </div>
 <pre><code># A tibble: 39 × 4
    age   sex    income daily_mean_n_trips
@@ -640,7 +643,7 @@ Figure 1: The overview of package functions to get the data
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>nt_dist_tbl <span class="ot">&lt;-</span> nt_dist <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">collect</span>()</span></code></pre></div>
 </div>
 <h3 id="pos-data">2.3. Population by overnight stay data</h3>
-<p>This dataset provides the number of people who spend the night in each location, also identifying their place of residence down to the census district level according to the <a href="https://www.ine.es/ss/Satellite?c=Page&amp;p=1259952026632&amp;pagename=ProductosYServicios%2FPYSLayout&amp;cid=1259952026632&amp;L=1" target="_blank">INE encoding</a>.</p>
+<p>This dataset provides the number of people who spend the night in each location, also identifying their place of residence down to the census district level according to the <a href="https://www.ine.es/dyngs/SER/en/index.htm?cid=1389" target="_blank">INE encoding</a>.</p>
 <p>Here are the variables you can find in the <code>district</code>, <code>municipality</code> and <code>large urban area</code> level data:</p>
 <table class="caption-top">
 <thead>
@@ -662,7 +665,7 @@ Figure 1: The overview of package functions to get the data
 <td><code>id_residence</code></td>
 <td><code>zona_residencia</code></td>
 <td><code>factor</code></td>
-<td>The identifier of the census district according to the <a href="https://www.ine.es/ss/Satellite?c=Page&amp;p=1259952026632&amp;pagename=ProductosYServicios%2FPYSLayout&amp;cid=1259952026632&amp;L=1" target="_blank">INE encoding</a>.</td>
+<td>The identifier of the census district according to the <a href="https://www.ine.es/dyngs/SER/en/index.htm?cid=1389" target="_blank">INE encoding</a>.</td>
 </tr>
 <tr class="odd">
 <td><code>id_overnight_stay</code></td>
@@ -710,7 +713,7 @@ Figure 1: The overview of package functions to get the data
 <p>For more advanced use, especially for analysing longer periods (months or even years), please see <a href="convert.html">Download and convert mobility datasets</a>.</p>
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-mitms_methodology_2022_v8" class="csl-entry" role="listitem">
-Ministerio de Transportes y Movilidad Sostenible (MITMS). 2024. <em>Estudio de Movilidad de Viajeros de Ámbito Nacional Aplicando La Tecnología Big Data. Informe Metodológico (Study of National Traveler Mobility Using Big Data Technology. Methodological Report)</em>. <a href="https://www.transportes.gob.es/recursos_mfom/paginabasica/recursos/a3_informe_metodologico_estudio_movilidad_mitms_v8.pdf">https://www.transportes.gob.es/recursos_mfom/paginabasica/recursos/a3_informe_metodologico_estudio_movilidad_mitms_v8.pdf</a>.
+Ministerio de Transportes y Movilidad Sostenible (MITMS). 2024. <em>Estudio de Movilidad de Viajeros de <span class="nocase">á</span>mbito Nacional Aplicando La Tecnolog<span>í</span>a Big Data. Informe Metodol<span>ó</span>gico (Study of National Traveler Mobility Using Big Data Technology. Methodological Report)</em>. <a href="https://www.transportes.gob.es/recursos_mfom/paginabasica/recursos/a3_informe_metodologico_estudio_movilidad_mitms_v8.pdf">https://www.transportes.gob.es/recursos_mfom/paginabasica/recursos/a3_informe_metodologico_estudio_movilidad_mitms_v8.pdf</a>.
 </div>
 <div id="ref-duckdb-r" class="csl-entry" role="listitem">
 Mühleisen, Hannes, and Mark Raasveldt. 2024. <em>Duckdb: DBI Package for the DuckDB Database Management System</em>. <a href="https://doi.org/10.32614/CRAN.package.duckdb">https://doi.org/10.32614/CRAN.package.duckdb</a>.

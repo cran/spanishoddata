@@ -1,5 +1,5 @@
 ## -----------------------------------------------------------------------------
-spanishoddata::spod_codebook(ver = 2)
+spod_codebook(ver = 2)
 
 
 ## -----------------------------------------------------------------------------
@@ -30,11 +30,13 @@ od_mean_trips_by_ses_over_the_4_days <- od_dist |>
   group_by(date, age, sex, income) |>
   summarise(
     n_trips = sum(n_trips, na.rm = TRUE),
-    .groups = "drop") |> 
+    .groups = "drop"
+  ) |>
   group_by(age, sex, income) |>
   summarise(
     daily_mean_n_trips = mean(n_trips, na.rm = TRUE),
-    .groups = "drop") |> 
+    .groups = "drop"
+  ) |>
   collect()
 od_mean_trips_by_ses_over_the_4_days
 

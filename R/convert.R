@@ -6,6 +6,10 @@
 #'
 #' Converts data for faster analysis into either `DuckDB` file or into `parquet` files in a hive-style directory structure. Running analysis on these files is sometimes 100x times faster than working with raw CSV files, espetially when these are in gzip archives. To connect to converted data, please use 'mydata <- \link{spod_connect}(data_path = path_returned_by_spod_convert)' passing the path to where the data was saved. The connected `mydata` can be analysed using `dplyr` functions such as \link[dplyr]{select}, \link[dplyr]{filter}, \link[dplyr]{mutate}, \link[dplyr]{group_by}, \link[dplyr]{summarise}, etc. In the end of any sequence of commands you will need to add \link[dplyr]{collect} to execute the whole chain of data manipulations and load the results into memory in an R `data.frame`/`tibble`. For more in-depth usage of such data, please refer to DuckDB documentation and examples at [https://duckdb.org/docs/api/r#dbplyr](https://duckdb.org/docs/api/r#dbplyr) . Some more useful examples can be found here [https://arrow-user2022.netlify.app/data-wrangling#combining-arrow-with-duckdb](https://arrow-user2022.netlify.app/data-wrangling#combining-arrow-with-duckdb) . You may also use `arrow` package to work with parquet files [https://arrow.apache.org/docs/r/](https://arrow.apache.org/docs/r/).
 #'
+#' For detailed data descriptions, see package vignettes using [`spod_codebook(ver = 1)`][spod_codebook] and [`spod_codebook(ver = 2)`][spod_codebook] and official methodology documents in **References** section.
+#'
+#' @template references
+#'
 #' @param save_format A `character` vector of length 1 with values "duckdb" or "parquet". Defaults to "duckdb". If `NULL` automatically inferred from the `save_path` argument. If only `save_format` is provided, `save_path` will be set to the default location set in `SPANISH_OD_DATA_DIR` environment variable using \link{spod_set_data_dir}`(path = 'path/to/your/cache/dir')`. So for v1 data that path would be `<data_dir>/clean_data/v1/tabular/duckdb/` or `<data_dir>/clean_data/v1/tabular/parquet/`.
 #'
 #' You can also set `save_path`. If it ends with ".duckdb", will save to `DuckDB` database format, if `save_path` does not end with ".duckdb", will save to `parquet` format and will treat the `save_path` as a path to a folder, not a file, will create necessary hive-style subdirectories in that folder. Hive style looks like `year=2020/month=2/day=14` and inside each such directory there will be a `data_0.parquet` file that contains the data for that day.
@@ -35,10 +39,10 @@
 #' # download and convert data
 #' dates_1 <- c(start = "2020-02-17", end = "2020-02-18")
 #' db_2 <- spod_convert(
-#'  type = "number_of_trips",
-#'  zones = "distr",
-#'  dates = dates_1,
-#'  overwrite = TRUE
+#'   type = "number_of_trips",
+#'   zones = "distr",
+#'   dates = dates_1,
+#'   overwrite = TRUE
 #' )
 #'
 #' # now connect to the converted data
@@ -113,7 +117,7 @@ spod_convert <- function(
     null.ok = TRUE
   )
   checkmate::assert_character(save_path, len = 1, null.ok = TRUE)
-  checkmate::assert_flag(overwrite)
+  # overwrite validation moved to after "update" check (line ~235)
   checkmate::assert_directory_exists(data_dir, access = "rw")
   checkmate::assert_flag(quiet)
   checkmate::assert_number(max_mem_gb, lower = 0.1, null.ok = TRUE)
@@ -150,11 +154,15 @@ spod_convert <- function(
       "Invalid save_format. Please select 'duckdb' or 'parquet', or leave empty to use the default, which is 'duckdb'."
     )
   }
-  # if (is.null(save_format) & is.null(save_path)) {
-  #   save_format <- "duckdb"
-  # } # maybe don't need this, see line with
-  # infer format from `save_path`
-  # below
+  # Set default if NULL
+  if (is.null(save_format)) {
+    if (!is.null(save_path) && grepl("\\.parquet$", save_path, ignore.case = TRUE)) {
+      save_format <- "parquet"
+    } else {
+      save_format <- "duckdb"
+    }
+  }
+  
   if (!save_format %in% c("duckdb", "parquet")) {
     stop(
       "Invalid save_format. Please set `save_format` to 'duckdb' or 'parquet', or leave empty to use the default, which is 'duckdb'."
@@ -175,7 +183,8 @@ spod_convert <- function(
     save_path <- fs::path(
       data_dir,
       spod_subfolder_clean_data_cache(ver = ver),
-      "tabular/duckdb/",
+      "tabular",
+      "duckdb",
       glue::glue("{type}_{zones}.duckdb")
     )
     if (isFALSE(quiet)) {
@@ -188,8 +197,9 @@ spod_convert <- function(
     save_path <- fs::path(
       data_dir,
       spod_subfolder_clean_data_cache(ver = ver),
-      "tabular/parquet/",
-      glue::glue("{type}_{zones}/")
+      "tabular",
+      "parquet",
+      glue::glue("{type}_{zones}")
     )
     if (isFALSE(quiet)) {
       message("Using default save_path: ", save_path)
@@ -204,7 +214,7 @@ spod_convert <- function(
       duckdb_target <- save_path
       # else check if it is a path to a folder
       # basically check that the path does not end with any other file extension other than .duckdb and then consider it as path to folder
-    } else if (!grepl('\\.[a-zA-Z0-9]+$', save_path)) {
+    } else if (!grepl("\\.[a-zA-Z0-9]+$", save_path)) {
       save_format <- "parquet"
     }
   }
@@ -222,20 +232,25 @@ spod_convert <- function(
     fs::dir_create(save_dir, recurse = TRUE)
   }
 
-  # check if overwrite update conflicts with `save_format`
-  if (overwrite == "update" & save_format == "duckdb") {
+  # check if overwrite update conflicts with `save_format` BEFORE validating as flag
+  if (identical(overwrite, "update") && save_format == "duckdb") {
     stop(
       "You are trying to save to a duckdb file with `overwrite = 'update'`. This is not supported. Please set `overwrite=TRUE` to remove the existing duckdb file and create a new one with the requested data."
     )
+  }
+  
+  # Now validate overwrite if it's not "update"
+  if (!identical(overwrite, "update")) {
+    checkmate::assert_flag(overwrite)
   }
 
   # check if duckdb file already exists
   # for conversion to duckdb we need to initialise a writeable database file
   # therefore  this check is before we create a database with `spod_get()` below
   if (save_format == "duckdb" && fs::file_exists(save_path)) {
-    if (!overwrite) {
+    if (!overwrite && isFALSE(quiet)) {
       message("Duckdb file already exists: ", save_path)
-      response <- readline(prompt = "Overwrite existing duckdb file? (yes/no) ")
+      response <- spod_readline(prompt = "Overwrite existing duckdb file? (yes/no) ")
       overwrite <- tolower(response) %in% c("y", "yes", "Yes")
 
       if (!overwrite) {
@@ -254,6 +269,7 @@ spod_convert <- function(
   }
 
   # create duckdb view with a file target
+  con <- NULL
   con <- spod_get(
     type = type,
     zones = zones,
@@ -265,6 +281,18 @@ spod_convert <- function(
     max_download_size_gb = max_download_size_gb,
     duckdb_target = duckdb_target,
     ignore_missing_dates = ignore_missing_dates
+  )
+  on.exit(
+    {
+      if (
+        exists("con", inherits = FALSE) &&
+          !is.null(con) &&
+          inherits(con, "tbl_duckdb_connection")
+      ) {
+        try(spod_disconnect(con, free_mem = TRUE), silent = TRUE)
+      }
+    },
+    add = TRUE
   )
 
   # resolve the actual database connection from the returned table
@@ -322,7 +350,7 @@ spod_convert <- function(
     # find all views that contain csv in any case
     tables_list <- tables_list[stringr::str_detect(tables_list, "csv")]
     if (length(tables_list) > 0) {
-      for (i in 1:length(tables_list)) {
+      for (i in seq_along(tables_list)) {
         sql_drop_view <- dplyr::sql(
           glue::glue(
             "DROP VIEW IF EXISTS {tables_list[i]};"
@@ -339,7 +367,7 @@ spod_convert <- function(
   # if save_format is parquet
   need_to_return_parquet_files <- FALSE # will change in the if below if needed
   if (save_format == "parquet") {
-    if (overwrite == FALSE | overwrite == 'update') {
+    if (overwrite == FALSE | overwrite == "update") {
       # check if there are any existing parquet files in the save_path
       parquet_files <- fs::dir_ls(
         save_path,
@@ -347,31 +375,37 @@ spod_convert <- function(
         recurse = TRUE
       )
       if (overwrite == FALSE & length(parquet_files) > 0) {
-        message(
-          "You have set `overwrite = FALSE`, but there are already parquet files in ",
-          save_path
-        )
-        response <- readline(
-          "What should be done? [D]elete all existing files in the target folder and convert all requested data from scratch? [U]pdate the folder with any new data while keeping the existing files? [C]ancel and quit? (D/U/C): "
-        )
+        if (isFALSE(quiet)) {
+          message(
+            "You have set `overwrite = FALSE`, but there are already parquet files in ",
+            save_path
+          )
+          response <- spod_readline(
+            "What should be done? [D]elete all existing files in the target folder and convert all requested data from scratch? [U]pdate the folder with any new data while keeping the existing files? [C]ancel and quit? (D/U/C): "
+          )
+        } else {
+          response <- "cancel"
+        }
       }
-      if (overwrite == 'update' & length(parquet_files) > 0) {
+      if (overwrite == "update" & length(parquet_files) > 0) {
         response <- overwrite
       }
       if (
-        (overwrite == 'update' | overwrite == FALSE) &
+        (overwrite == "update" | overwrite == FALSE) &
           length(parquet_files) == 0
       ) {
-        response <- 'skip'
+        response <- "skip"
         overwrite <- TRUE
       }
 
       if (tolower(response) %in% c("c", "cancel")) {
-        message(
-          "Cancelled by the user. Exiting without overwriting existing parquet files. You may delete them from ",
-          save_path,
-          " manually and rerun the function. Or rerun the function with `overwrite = TRUE` or `overwrite = 'update'`."
-        )
+        if (isFALSE(quiet)) {
+          message(
+            "Cancelled by the user. Exiting without overwriting existing parquet files. You may delete them from ",
+            save_path,
+            " manually and rerun the function. Or rerun the function with `overwrite = TRUE` or `overwrite = 'update'`."
+          )
+        }
         return(invisible(NULL))
       }
 
@@ -443,8 +477,8 @@ spod_convert <- function(
     )
   }
 
-  DBI::dbDisconnect(db_con, shutdown = TRUE)
-  # duckdb::duckdb_shutdown(drv)
+  spod_disconnect(con, free_mem = TRUE)
+  con <- NULL
 
   # time to move back the pre-existing parquet files if we moved them to temp folder
   if (need_to_return_parquet_files) {
@@ -456,7 +490,9 @@ spod_convert <- function(
     fs::dir_delete(temp_path)
   }
 
-  message("Data imported into ", save_format, " at: ", save_path)
+  if (isFALSE(quiet)) {
+    message("Data imported into ", save_format, " at: ", save_path)
+  }
 
   # a few instructions on how to use the duckdb file
   if (isFALSE(quiet)) {
