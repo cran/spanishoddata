@@ -1,3 +1,11 @@
+# spanishoddata 0.2.4
+
+## Bug fixes
+
+* Fixed a bug ([#186](https://github.com/rOpenSpain/spanishoddata/issues/186)) where literal `'NA'` strings in the source MITMA CSV files caused DuckDB conversion errors when casting to enums or other non-string types. This fix handles `'NA'` values in columns like `renta`, `distancia`, `residencia`, `origen`, `destino`, `actividad`, and others across v1 and v2 data.
+
+* Improve reliability on network failures.
+
 # spanishoddata 0.2.3
 
 ## Bug fixes
