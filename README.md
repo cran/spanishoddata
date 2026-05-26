@@ -107,6 +107,30 @@ daily flows in Barcelona with time filter
 To create interactive maps see our vignette
 [here](https://ropenspain.github.io/spanishoddata/articles/flowmaps-interactive.html).
 
+### Data availability
+
+The following plot shows the dates for which origin-destination data is
+currently available. It is updated weekly by a [GitHub
+Action](https://github.com/rOpenSpain/spanishoddata/actions/workflows/data-availability-plot.yaml).
+
+Latest Data Availability:
+
+- **v1 (2020–2021)**: Data available from **14 February 2020** to **09
+  May 2021** (Districts and Municipalities).
+- **v2 (2022 onwards)**: Data available from **01 January 2022** onwards
+  (Districts, Municipalities, and Large Urban Areas).
+
+| Version | Live Status Badge |
+|----|----|
+| **v1** | ![Latest v1 data](https://img.shields.io/endpoint?url=https://rOpenSpain.github.io/spanishoddata/data-availability/latest_v1.json) |
+| **v2** | ![Latest v2 data](https://img.shields.io/endpoint?url=https://rOpenSpain.github.io/spanishoddata/data-availability/latest_v2.json) |
+
+[Open the interactive data availability
+plot](https://rOpenSpain.github.io/spanishoddata/data-availability/data_availability.html).
+
+![Dates for which origin-destination data is
+available](https://rOpenSpain.github.io/spanishoddata/data-availability/data_availability.png)
+
 ## Install the package
 
 Install from CRAN:
@@ -550,7 +574,7 @@ To cite the `spanishoddata` R package in publications use:
 Kotov E, Vidal-Tortosa E, Cantú-Ros O, Burrieza-Galán J, Herranz R,
 Gullón Muñoz-Repiso T, Lovelace R (2026). “spanishoddata: A package for
 accessing and working with Spanish Open Mobility Big Data.” *Environment
-and Planning B: Urban Analytics and City Science*. ISSN 2399-8083,
+and Planning B: Urban Analytics and City Science*. ISSN 2399-8083.
 doi:10.1177/23998083251415040
 <https://doi.org/10.1177/23998083251415040>.
 
@@ -646,8 +670,7 @@ Try the new work-in-progress package:
 
 <!-- codemetar::write_codemeta(write_minimeta = T) -->
 
-<div id="refs" class="references csl-bib-body hanging-indent"
-entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
 <div id="ref-lovelace_od_2024" class="csl-entry">
 
@@ -658,8 +681,8 @@ Origin-Destination Data*. <https://doi.org/10.32614/CRAN.package.od>.
 
 <div id="ref-mitms_mobility_web" class="csl-entry">
 
-Ministerio de Transportes y Movilidad Sostenible (MITMS). 2024. “Estudio
-de La Movilidad Con Big Data (Study of Mobility with Big Data).”
+Ministerio de Transportes y Movilidad Sostenible (MITMS). 2024. *Estudio
+de La Movilidad Con Big Data (Study of Mobility with Big Data)*.
 <https://www.transportes.gob.es/ministerio/proyectos-singulares/estudio-de-movilidad-con-big-data>.
 
 </div>

@@ -1,6 +1,6 @@
 Package: spanishoddata
 Title: Get Spanish Origin-Destination Data
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: c(
     person("Egor", "Kotov", , "kotov.egor@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6690-5345")),
@@ -33,8 +33,8 @@ Imports: checkmate, DBI, digest, dplyr, duckdb (>= 0.5.0), fs, glue,
         parallelly, paws.storage (>= 0.4.0), purrr, Rdpack, readr,
         rlang, sf, stats, stringr, tibble, xml2
 Suggests: cli, flowmapblue, flowmapper (>= 0.1.2), furrr, future,
-        future.mirai, hexSticker, mapSpain, quarto, remotes, scales,
-        testthat (>= 3.0.0), tidyverse, withr
+        future.mirai, ggiraph, hexSticker, htmlwidgets, mapSpain,
+        quarto, remotes, scales, testthat (>= 3.0.0), tidyverse, withr
 VignetteBuilder: quarto
 RdMacros: Rdpack
 Config/Needs/website: rmarkdown
@@ -42,11 +42,11 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 NeedsCompilation: no
-Packaged: 2026-04-09 12:48:59 UTC; ek
+Packaged: 2026-05-26 13:02:40 UTC; ek
 Author: Egor Kotov [aut, cre] (ORCID: <https://orcid.org/0000-0001-6690-5345>),
   Robin Lovelace [aut] (ORCID: <https://orcid.org/0000-0001-5679-6536>),
   Eugeni Vidal-Tortosa [ctb] (ORCID:
     <https://orcid.org/0000-0001-5199-4103>)
 Maintainer: Egor Kotov <kotov.egor@gmail.com>
 Repository: CRAN
-Date/Publication: 2026-04-09 13:10:02 UTC
+Date/Publication: 2026-05-26 13:20:02 UTC
